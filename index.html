@@ -24,8 +24,8 @@
 	
 	<meta property="og:title" content="Authomatic" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://authomatic.org/index.html" />
-	<meta property="og:image" content="http://authomatic.org/_static/img/authomatic-seo.gif" />
+	<meta property="og:url" content="http://peterhudec.github.io/authomatic/index.html" />
+	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
 	<meta property="og:description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library." />
@@ -62,7 +62,16 @@
 
 
 
-<body><div id="root"><div class="contain-to-grid">
+<body>
+	
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=249464911861131";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script><div id="root"><div class="contain-to-grid">
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
@@ -158,6 +167,22 @@ for a succinct library.
 		        
 		    </div>
 	    </div>
+	    
+	    <div class="social-buttons">
+	    	<ul>
+	    		<li>
+	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/index.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+	    		</li>
+	    		<li>
+	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/index.html"></div>
+	    		</li>
+	    		<li>
+	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	    		</li>
+	    	</ul>
+	    	
+	    </div>
 		
 		
 		
@@ -199,20 +224,35 @@ for a succinct library.
 the library is in its <strong>very early stage</strong>
 and there are practically <strong>no tests</strong>!</p>
 </div>
+</div>
+<div class="section" id="live-demo">
+<h1>Live Demo<a class="headerlink" href="#live-demo" title="Permalink to this headline">¶</a></h1>
+<p>There is a Google App Engine based live demo app running at
+<a class="reference external" href="http://authomatic-example.appspot.com">http://authomatic-example.appspot.com</a> which makes use of most of the features.</p>
+</div>
+<div class="section" id="contribute">
+<h1>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h1>
+<p>Contributions of any kind are very welcome.
+The project is hosted on <a class="reference external" href="https://github.com/peterhudec/authomatic">GitHub</a>.
+If you find this library useful and are using it in your projects,
+please don&#8217;t be shy and leave a comment about your usecase on the
+<a class="reference external" href="https://github.com/peterhudec/authomatic/issues/1">Authomatic Usecases</a> issue.</p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#features" id="id1">Features</a></li>
-<li><a class="reference internal" href="#usage" id="id2">Usage</a><ul>
-<li><a class="reference internal" href="#setup-the-library" id="id3">Setup the Library</a></li>
-<li><a class="reference internal" href="#log-the-user-in" id="id4">Log the User In</a></li>
-<li><a class="reference internal" href="#advanced" id="id5">Advanced</a><ul>
-<li><a class="reference internal" href="#credentials" id="id6">Credentials</a></li>
-<li><a class="reference internal" href="#asynchronous-requests" id="id7">Asynchronous Requests</a></li>
-<li><a class="reference internal" href="#session" id="id8">Session</a></li>
-<li><a class="reference internal" href="#javascript" id="id9">JavaScript</a><ul>
-<li><a class="reference internal" href="#popup" id="id10">Popup</a></li>
-<li><a class="reference internal" href="#access" id="id11">Access</a></li>
+<li><a class="reference internal" href="#features" id="id2">Features</a></li>
+<li><a class="reference internal" href="#live-demo" id="id3">Live Demo</a></li>
+<li><a class="reference internal" href="#contribute" id="id4">Contribute</a></li>
+<li><a class="reference internal" href="#usage" id="id5">Usage</a><ul>
+<li><a class="reference internal" href="#setup-the-library" id="id6">Setup the Library</a></li>
+<li><a class="reference internal" href="#log-the-user-in" id="id7">Log the User In</a></li>
+<li><a class="reference internal" href="#advanced" id="id8">Advanced</a><ul>
+<li><a class="reference internal" href="#credentials" id="id9">Credentials</a></li>
+<li><a class="reference internal" href="#asynchronous-requests" id="id10">Asynchronous Requests</a></li>
+<li><a class="reference internal" href="#session" id="id11">Session</a></li>
+<li><a class="reference internal" href="#javascript" id="id12">JavaScript</a><ul>
+<li><a class="reference internal" href="#popup" id="id13">Popup</a></li>
+<li><a class="reference internal" href="#access" id="id14">Access</a></li>
 </ul>
 </li>
 </ul>
@@ -225,7 +265,7 @@ and there are practically <strong>no tests</strong>!</p>
 <div class="section" id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>So you want your app to be able to log a <strong>user</strong> in with <strong>Facebook</strong>, <strong>Twitter</strong>, <a class="reference external" href="http://openid.net/">OpenID</a> or whatever?
-First install <strong>Authomatic</strong> through <a href="#id12"><span class="problematic" id="id13">`PyPi &lt;&gt;`_</span></a>,</p>
+First install <strong>Authomatic</strong> through <a class="reference external" href="https://pypi.python.org/pypi/Authomatic">PyPi</a>,</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pip install authomatic
 </pre></div>
 </div>
@@ -233,7 +273,12 @@ First install <strong>Authomatic</strong> through <a href="#id12"><span class="p
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone git://github.com/peterhudec/authomatic.git
 </pre></div>
 </div>
-<p>Then it&#8217;s death simple (hence the <em>Deadsimpleauth</em>). Just go through these two steps:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">On <a class="reference external" href="https://developers.google.com/appengine/">Google App Engine</a> you need to include the <a class="reference internal" href="reference/functions.html#module-authomatic" title="authomatic"><tt class="xref py py-mod docutils literal"><span class="pre">authomatic</span></tt></a> module
+or a link to it inside your app&#8217;s directory.</p>
+</div>
+<p>Now it&#8217;s dead simple (hence the <em>Deadsimpleauth</em>). Just go through these two steps:</p>
 <ol class="arabic simple">
 <li>Set up the library with <a class="reference internal" href="reference/functions.html#authomatic.setup" title="authomatic.setup"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.setup()</span></tt></a>.</li>
 <li>Log the <strong>user</strong> in by calling <a class="reference internal" href="reference/functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> inside a <em>request handler</em>.</li>
@@ -728,7 +773,11 @@ allways makes the request in the most efficient way.</p>
 	</div><div id="footer"><div id="bottom-nav"><span><a href="genindex.html"  title="General Index">index</a></span>
 				<span><a href="py-modindex.html"  title="Python Module Index">modules</a></span>
 				<span><a href="reference/index.html"  title="Reference">next &raquo;</a></span></div><div id="footer-notice">
-			        &copy; Copyright 2013, Peter Hudec.
+			    	&copy; Copyright 2012,
+			    	
+			    		<a href="http://peterhudec.com">Peter Hudec</a>
+			    		<a class="google-plus-badge" href="//plus.google.com/117034840853387702598?rel=author" rel="author" style="text-decoration:none;">
+						<img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/></a>.
 		        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	    </div></div><script>
 		document.write('<script src=' +
@@ -755,11 +804,19 @@ allways makes the request in the most efficient way.</p>
 		$('col').attr('width', null);
 		
 		// Add "returns" class to all returns elements
-		$(".field-name:contains('Returns:')").parent().addClass('returns')
+		$(".field-name:contains('Returns:')").parent().addClass('returns');
+		
+		
+		(function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+		
 		
 		
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-40552373-1']);
+		_gaq.push(['_setAccount', 'UA-40554445-4']);
 		_gaq.push(['_trackPageview']);
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -768,6 +825,13 @@ allways makes the request in the most efficient way.</p>
 		})();
 		
 	</script>
+	
+		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
+			<img style="position: absolute; top: 0; right: 0; border: 0;"
+				 src="_static/img/github-ribbon-right.png"
+				 alt="Fork me on GitHub">
+		</a>
+	
 </body>
 
 </html>

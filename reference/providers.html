@@ -24,8 +24,8 @@
 	
 	<meta property="og:title" content="Providers | Authomatic" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://authomatic.org/reference/providers.html" />
-	<meta property="og:image" content="http://authomatic.org/_static/img/authomatic-seo.gif" />
+	<meta property="og:url" content="http://peterhudec.github.io/authomatic/reference/providers.html" />
+	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
 	<meta property="og:description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library." />
@@ -62,7 +62,16 @@
 
 
 
-<body><div id="root"><div class="contain-to-grid">
+<body>
+	
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=249464911861131";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script><div id="root"><div class="contain-to-grid">
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
@@ -161,6 +170,22 @@ for a succinct library.
 		        
 		    </div>
 	    </div>
+	    
+	    <div class="social-buttons">
+	    	<ul>
+	    		<li>
+	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/reference/providers.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+	    		</li>
+	    		<li>
+	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/reference/providers.html"></div>
+	    		</li>
+	    		<li>
+	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	    		</li>
+	    	</ul>
+	    	
+	    </div>
 		
 		
 		
@@ -258,7 +283,7 @@ the values set in <a class="reference internal" href="config.html"><em>Config</e
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td rowspan="7"><a class="reference internal" href="#authomatic.providers.oauth2.OAuth2" title="authomatic.providers.oauth2.OAuth2"><tt class="xref py py-class docutils literal"><span class="pre">OAuth2</span></tt></a></td>
+<tr class="row-even"><td rowspan="8"><a class="reference internal" href="#authomatic.providers.oauth2.OAuth2" title="authomatic.providers.oauth2.OAuth2"><tt class="xref py py-class docutils literal"><span class="pre">OAuth2</span></tt></a></td>
 <td>consumer_key</td>
 <td>yes</td>
 <td>&nbsp;</td>
@@ -287,32 +312,40 @@ the values set in <a class="reference internal" href="config.html"><em>Config</e
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td rowspan="6"><a class="reference internal" href="#authomatic.providers.oauth1.OAuth1" title="authomatic.providers.oauth1.OAuth1"><tt class="xref py py-class docutils literal"><span class="pre">OAuth1</span></tt></a></td>
+<tr class="row-odd"><td>popup</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td rowspan="7"><a class="reference internal" href="#authomatic.providers.oauth1.OAuth1" title="authomatic.providers.oauth1.OAuth1"><tt class="xref py py-class docutils literal"><span class="pre">OAuth1</span></tt></a></td>
 <td>consumer_key</td>
 <td>yes</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>consumer_secret</td>
+<tr class="row-odd"><td>consumer_secret</td>
 <td>yes</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>short_name</td>
+<tr class="row-even"><td>short_name</td>
 <td>yes</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>request_token_params</td>
+<tr class="row-odd"><td>request_token_params</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>user_authorization_params</td>
+<tr class="row-even"><td>user_authorization_params</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>access_token_params</td>
+<tr class="row-odd"><td>access_token_params</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td rowspan="10"><a class="reference internal" href="#authomatic.providers.openid.OpenID" title="authomatic.providers.openid.OpenID"><tt class="xref py py-class docutils literal"><span class="pre">OpenID</span></tt></a></td>
+<tr class="row-even"><td>popup</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td rowspan="11"><a class="reference internal" href="#authomatic.providers.openid.OpenID" title="authomatic.providers.openid.OpenID"><tt class="xref py py-class docutils literal"><span class="pre">OpenID</span></tt></a></td>
 <td>identifier_param</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -353,8 +386,16 @@ the values set in <a class="reference internal" href="config.html"><em>Config</e
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#authomatic.providers.gaeopenid.GAEOpenID" title="authomatic.providers.gaeopenid.GAEOpenID"><tt class="xref py py-class docutils literal"><span class="pre">GAEOpenID</span></tt></a></td>
+<tr class="row-odd"><td>popup</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td rowspan="2"><a class="reference internal" href="#authomatic.providers.gaeopenid.GAEOpenID" title="authomatic.providers.gaeopenid.GAEOpenID"><tt class="xref py py-class docutils literal"><span class="pre">GAEOpenID</span></tt></a></td>
 <td>identifier_param</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>popup</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
@@ -614,7 +655,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 <p class="last">This provider doesn&#8217;t support CSRF protection!</p>
 </div>
 <ul class="simple">
-<li>Dashboard: <a class="reference external" href="http://dev.bitly.com/my_apps.html">http://dev.bitly.com/my_apps.html</a></li>
+<li>Dashboard: <a class="reference external" href="https://bitly.com/a/oauth_apps">https://bitly.com/a/oauth_apps</a></li>
 <li>Docs: <a class="reference external" href="http://dev.bitly.com/authentication.html">http://dev.bitly.com/authentication.html</a></li>
 <li>API reference: <a class="reference external" href="http://dev.bitly.com/api.html">http://dev.bitly.com/api.html</a></li>
 </ul>
@@ -629,7 +670,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 <p class="last">Cosm doesn&#8217;t provide any <em>user info URL</em>.</p>
 </div>
 <ul class="simple">
-<li>Dashboard: <a class="reference external" href="https://cosm.com/users/peterhudec/apps">https://cosm.com/users/peterhudec/apps</a></li>
+<li>Dashboard: <a class="reference external" href="https://cosm.com/users">https://cosm.com/users</a>/{your_username}/apps</li>
 <li>Docs: <a class="reference external" href="https://cosm.com/docs/">https://cosm.com/docs/</a></li>
 <li>API reference: <a class="reference external" href="https://cosm.com/docs/v2/">https://cosm.com/docs/v2/</a></li>
 </ul>
@@ -1622,6 +1663,13 @@ is finished with <a class="reference internal" href="classes.html#authomatic.cor
 <dd><p><a class="reference internal" href="classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">core.User</span></tt></a>.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="authomatic.providers.BaseProvider.popup">
+<tt class="descname">popup</tt><em class="property"> = None</em><a class="headerlink" href="#authomatic.providers.BaseProvider.popup" title="Permalink to this definition">¶</a></dt>
+<dd><p><tt class="xref py py-class docutils literal"><span class="pre">bool</span></tt> If <tt class="docutils literal"><span class="pre">True</span></tt>, the <tt class="xref py py-attr docutils literal"><span class="pre">BaseProvider.user_authorization_url</span></tt> will be displayed
+in a <em>popup mode</em>, if the <strong>provider</strong> supports it.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="authomatic.providers.BaseProvider.login">
 <tt class="descname">login</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#BaseProvider.login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.BaseProvider.login" title="Permalink to this definition">¶</a></dt>
@@ -2001,7 +2049,11 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 			<span><a href="../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../py-modindex.html"  title="Python Module Index">modules</a></span>
 				<span><a href="extras.html"  title="Extras">next &raquo;</a></span></div><div id="footer-notice">
-			        &copy; Copyright 2013, Peter Hudec.
+			    	&copy; Copyright 2012,
+			    	
+			    		<a href="http://peterhudec.com">Peter Hudec</a>
+			    		<a class="google-plus-badge" href="//plus.google.com/117034840853387702598?rel=author" rel="author" style="text-decoration:none;">
+						<img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/></a>.
 		        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	    </div></div><script>
 		document.write('<script src=' +
@@ -2028,11 +2080,19 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 		$('col').attr('width', null);
 		
 		// Add "returns" class to all returns elements
-		$(".field-name:contains('Returns:')").parent().addClass('returns')
+		$(".field-name:contains('Returns:')").parent().addClass('returns');
+		
+		
+		(function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+		
 		
 		
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-40552373-1']);
+		_gaq.push(['_setAccount', 'UA-40554445-4']);
 		_gaq.push(['_trackPageview']);
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -2041,6 +2101,13 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 		})();
 		
 	</script>
+	
+		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
+			<img style="position: absolute; top: 0; right: 0; border: 0;"
+				 src="../_static/img/github-ribbon-right.png"
+				 alt="Fork me on GitHub">
+		</a>
+	
 </body>
 
 </html>

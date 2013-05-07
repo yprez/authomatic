@@ -24,8 +24,8 @@
 	
 	<meta property="og:title" content="Sphinx Foundation Theme | Authomatic" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://authomatic.org/_themes/foundation-sphinx-theme/README.html" />
-	<meta property="og:image" content="http://authomatic.org/_static/img/authomatic-seo.gif" />
+	<meta property="og:url" content="http://peterhudec.github.io/authomatic/_themes/foundation-sphinx-theme/README.html" />
+	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
 	<meta property="og:description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library." />
@@ -62,7 +62,16 @@
 
 
 
-<body><div id="root"><div class="contain-to-grid">
+<body>
+	
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=249464911861131";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script><div id="root"><div class="contain-to-grid">
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
@@ -154,6 +163,22 @@ for a succinct library.
 		        </div>
 		        
 		    </div>
+	    </div>
+	    
+	    <div class="social-buttons">
+	    	<ul>
+	    		<li>
+	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/_themes/foundation-sphinx-theme/README.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+	    		</li>
+	    		<li>
+	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/_themes/foundation-sphinx-theme/README.html"></div>
+	    		</li>
+	    		<li>
+	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	    		</li>
+	    	</ul>
+	    	
 	    </div>
 		
 		
@@ -248,6 +273,45 @@ extend the <tt class="docutils literal"><span class="pre">sass</span></tt> sourc
 
         <span class="c"># Use this as the base for Open Graph URLs without trailing slash.</span>
         <span class="s">&#39;base_url&#39;</span><span class="p">:</span> <span class="s">&#39;http://example.com&#39;</span><span class="p">,</span>
+
+        <span class="c"># If true a bar with Facebook, Google+ and Twitter social buttons will be displayed</span>
+        <span class="c"># underneath the header.</span>
+        <span class="s">&#39;social_buttons&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+
+        <span class="c"># ID of your Facebook app associated with the Facebook Like button.</span>
+        <span class="s">&#39;facebook_app_id&#39;</span><span class="p">:</span> <span class="s">&#39;123456789&#39;</span><span class="p">,</span>
+
+        <span class="c"># A Twitter ID used for the via mention of the Twitter button.</span>
+        <span class="s">&#39;twitter_id&#39;</span><span class="p">:</span> <span class="s">&#39;FoundationSphinx&#39;</span><span class="p">,</span>
+
+
+        <span class="c"># If &quot;author&quot; and &quot;copyright_year&quot; are set they will override the &quot;copyright&quot; setting.</span>
+
+        <span class="c"># Author&#39;s name.</span>
+        <span class="s">&#39;author&#39;</span><span class="p">:</span> <span class="s">&#39;Peter Hudec&#39;</span><span class="p">,</span>
+
+        <span class="c"># Author&#39;s link.</span>
+        <span class="s">&#39;author_link&#39;</span><span class="p">:</span> <span class="s">&#39;http://peterhudec.com&#39;</span><span class="p">,</span>
+
+        <span class="c"># Year to be used in the copyright statement.</span>
+        <span class="s">&#39;copyright_year&#39;</span><span class="p">:</span> <span class="s">&#39;2013&#39;</span><span class="p">,</span>
+
+        <span class="c"># Author&#39;s Google+ id. If set a G+ authorship link will be added.</span>
+        <span class="s">&#39;google_plus_id&#39;</span><span class="p">:</span> <span class="s">&#39;117034840853387702598&#39;</span><span class="p">,</span>
+
+
+        <span class="c"># Fork me on GitHub ribbon will be displayed if both &quot;github_id&quot; and &quot;github_ribbon_image&quot; are set:</span>
+        <span class="c"># https://github.com/blog/273-github-ribbons</span>
+        <span class="c"># Ribbons are hidden on small screens!</span>
+
+        <span class="c"># Path to your GitHub project.</span>
+        <span class="s">&#39;github_id&#39;</span><span class="p">:</span> <span class="s">&#39;peterhudec/foundation-sphinx-theme&#39;</span><span class="p">,</span>
+
+        <span class="c"># Path to the ribbon image relative to the &quot;_static&quot; directory.</span>
+        <span class="s">&#39;github_ribbon_image&#39;</span><span class="p">:</span> <span class="s">&#39;my-github-ribbon.png&#39;</span><span class="p">,</span>
+
+        <span class="c"># Position of the ribbon &quot;left&quot; or &quot;right&quot;.</span>
+        <span class="s">&#39;github_ribbon_position&#39;</span><span class="p">:</span> <span class="s">&#39;right&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -302,7 +366,11 @@ extend the <tt class="docutils literal"><span class="pre">sass</span></tt> sourc
 	</div><div id="footer"><div id="bottom-nav"><span><a href="../../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../../py-modindex.html"  title="Python Module Index">modules</a></span>
 				</div><div id="footer-notice">
-			        &copy; Copyright 2013, Peter Hudec.
+			    	&copy; Copyright 2012,
+			    	
+			    		<a href="http://peterhudec.com">Peter Hudec</a>
+			    		<a class="google-plus-badge" href="//plus.google.com/117034840853387702598?rel=author" rel="author" style="text-decoration:none;">
+						<img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/></a>.
 		        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	    </div></div><script>
 		document.write('<script src=' +
@@ -329,11 +397,19 @@ extend the <tt class="docutils literal"><span class="pre">sass</span></tt> sourc
 		$('col').attr('width', null);
 		
 		// Add "returns" class to all returns elements
-		$(".field-name:contains('Returns:')").parent().addClass('returns')
+		$(".field-name:contains('Returns:')").parent().addClass('returns');
+		
+		
+		(function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+		
 		
 		
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-40552373-1']);
+		_gaq.push(['_setAccount', 'UA-40554445-4']);
 		_gaq.push(['_trackPageview']);
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -342,6 +418,13 @@ extend the <tt class="docutils literal"><span class="pre">sass</span></tt> sourc
 		})();
 		
 	</script>
+	
+		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
+			<img style="position: absolute; top: 0; right: 0; border: 0;"
+				 src="../../_static/img/github-ribbon-right.png"
+				 alt="Fork me on GitHub">
+		</a>
+	
 </body>
 
 </html>

@@ -24,8 +24,8 @@
 	
 	<meta property="og:title" content="Extras | Authomatic" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://authomatic.org/reference/extras.html" />
-	<meta property="og:image" content="http://authomatic.org/_static/img/authomatic-seo.gif" />
+	<meta property="og:url" content="http://peterhudec.github.io/authomatic/reference/extras.html" />
+	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
 	<meta property="og:description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library." />
@@ -62,7 +62,16 @@
 
 
 
-<body><div id="root"><div class="contain-to-grid">
+<body>
+	
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=249464911861131";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script><div id="root"><div class="contain-to-grid">
 			<nav class="top-bar">
 				<ul class="title-area">
 					<li class="name">
@@ -160,6 +169,22 @@ for a succinct library.
 		        </div>
 		        
 		    </div>
+	    </div>
+	    
+	    <div class="social-buttons">
+	    	<ul>
+	    		<li>
+	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/reference/extras.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+	    		</li>
+	    		<li>
+	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/reference/extras.html"></div>
+	    		</li>
+	    		<li>
+	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	    		</li>
+	    	</ul>
+	    	
 	    </div>
 		
 		
@@ -349,7 +374,11 @@ saving the session <strong>data</strong> to storage.</p>
 			<span><a href="../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../py-modindex.html"  title="Python Module Index">modules</a></span>
 				<span><a href="javascript.html"  title="JavaScript">next &raquo;</a></span></div><div id="footer-notice">
-			        &copy; Copyright 2013, Peter Hudec.
+			    	&copy; Copyright 2012,
+			    	
+			    		<a href="http://peterhudec.com">Peter Hudec</a>
+			    		<a class="google-plus-badge" href="//plus.google.com/117034840853387702598?rel=author" rel="author" style="text-decoration:none;">
+						<img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/></a>.
 		        Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
 	    </div></div><script>
 		document.write('<script src=' +
@@ -376,11 +405,19 @@ saving the session <strong>data</strong> to storage.</p>
 		$('col').attr('width', null);
 		
 		// Add "returns" class to all returns elements
-		$(".field-name:contains('Returns:')").parent().addClass('returns')
+		$(".field-name:contains('Returns:')").parent().addClass('returns');
+		
+		
+		(function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+		
 		
 		
 		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-40552373-1']);
+		_gaq.push(['_setAccount', 'UA-40554445-4']);
 		_gaq.push(['_trackPageview']);
 		(function() {
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -389,6 +426,13 @@ saving the session <strong>data</strong> to storage.</p>
 		})();
 		
 	</script>
+	
+		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
+			<img style="position: absolute; top: 0; right: 0; border: 0;"
+				 src="../_static/img/github-ribbon-right.png"
+				 alt="Fork me on GitHub">
+		</a>
+	
 </body>
 
 </html>

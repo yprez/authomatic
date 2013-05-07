@@ -68,7 +68,7 @@ dt, li
 #header
   padding: #{$padding * 2} #{$padding}
   
-  margin-bottom: $margin
+  // margin-bottom: $margin
   
   #logo-container
     margin-bottom: $margin * 2
@@ -99,6 +99,26 @@ dt, li
 
 #navigation>div
   padding: $margin-2
+
+#github-ribbon
+  display: none
+
+div.social-buttons
+  text-align: center
+  padding: $padding
+  margin-bottom: $margin * 2
+  >ul
+    margin: 0em auto
+    line-height: 20px
+    display: inline
+    >li
+      display: inline-block
+      list-style-type: none
+      height: 20px
+      width: 100px
+      line-height: 20px
+      padding: 0em
+      text-align: left
 
 #content
   ul>li
@@ -163,10 +183,19 @@ dt, li
 #footer
   margin: 0em
 
+.google-plus-badge
+  img
+    vertical-align: -3px
+    border: 0px
+    width: 16px
+    height: 16px
 
 @media only screen and (min-width: 768px)
   dt, li
     word-break: normal
+  
+  #github-ribbon
+    display: block
   
   #header 
     text-align: left
