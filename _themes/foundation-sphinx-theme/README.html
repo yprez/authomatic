@@ -28,13 +28,13 @@
 	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
-	<meta property="og:description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library." />
+	<meta property="og:description" content="Simple yet powerful authorization / authentication client library for Python WEB applications." />
 	<meta property="og:site_name" content="Authomatic" />
 	
 	
     
     
-	<meta name="description" content="Authomatic is an authorization / authentication client library for Python web applications inspired by Alex Vagin’s Simpleauth. In fact, I almost named it Deathsimpleauth, but that name would be too long for a succinct library.">
+	<meta name="description" content="Simple yet powerful authorization / authentication client library for Python WEB applications.">
     
 	
 	
@@ -193,7 +193,25 @@ for a succinct library.
 				
   <div class="section" id="sphinx-foundation-theme">
 <h1>Sphinx Foundation Theme<a class="headerlink" href="#sphinx-foundation-theme" title="Permalink to this headline">¶</a></h1>
-<p>This is a Sphinx theme based on the <a class="reference external" href="http://foundation.zurb.com/">Foundation 4</a> css framework.</p>
+<p>This is a Sphinx theme based on the <a class="reference external" href="http://foundation.zurb.com/">Foundation 4</a> css framework.
+It was created as a by-product of the <a class="reference external" href="http://peterhudec.github.io/authomatic">Authomatic</a>
+authentication / authorization library.</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Responsive design</li>
+<li>Support for SVG in <tt class="docutils literal"><span class="pre">&lt;img/&gt;</span></tt> tags with fallback to PNG</li>
+<li>Google Analytics support</li>
+<li>Fork Me On Github support</li>
+<li>SEO rudiments<ul>
+<li>SEO meta tags</li>
+<li>Open Graph meta tags</li>
+<li>Facebbok, Twitter and Google+ social buttons</li>
+<li>Authorship Google Rich Snippet</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Set the <tt class="docutils literal"><span class="pre">html_theme</span></tt> variable to <tt class="docutils literal"><span class="pre">'foundation'</span></tt>.</p>
@@ -270,6 +288,10 @@ extend the <tt class="docutils literal"><span class="pre">sass</span></tt> sourc
         <span class="s">&#39;meta_tags&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="c"># will be rendered as &lt;meta name=&quot;foo&quot; content=&quot;bar&quot;&gt;</span>
         <span class="p">},</span>
+
+        <span class="c"># The value for &quot;description&quot; and &quot;og:description&quot; metatags.</span>
+        <span class="c"># If omitted, the value of &quot;motto&quot; will be used.</span>
+        <span class="s">&#39;seo_description&#39;</span><span class="p">:</span> <span class="s">&#39;This is an example of the Foundation Sphinx Theme output.&#39;</span><span class="p">,</span>
 
         <span class="c"># Use this as the base for Open Graph URLs without trailing slash.</span>
         <span class="s">&#39;base_url&#39;</span><span class="p">:</span> <span class="s">&#39;http://example.com&#39;</span><span class="p">,</span>
