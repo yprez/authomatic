@@ -275,7 +275,7 @@ a random secret string used for session and CSRF token generation.</p>
 </pre></div>
 </div>
 <p>Add a simple request handler which accepts <tt class="docutils literal"><span class="pre">GET</span></tt> and <tt class="docutils literal"><span class="pre">POST</span></tt> HTTP methods and
-recieves the <tt class="docutils literal"><span class="pre">provider_name</span></tt> URL variable.</p>
+receives the <tt class="docutils literal"><span class="pre">provider_name</span></tt> URL variable.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Login</span><span class="p">(</span><span class="n">webapp2</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">):</span>
 </pre></div>
@@ -394,7 +394,7 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 </pre></div>
 </div>
 <p>That&#8217;s it for the <em>Login</em> handler.</p>
-<p>Now just for convenience that we don&#8217;t have to enter all the URLs manualy
+<p>Now just for convenience that we don&#8217;t have to enter all the URLs manually
 let&#8217;s create a <em>Home</em> handler.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Home</span><span class="p">(</span><span class="n">webapp2</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

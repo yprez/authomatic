@@ -198,9 +198,10 @@ for a succinct library.
 </div>
 <div class="section" id="features">
 <h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
 <ul class="simple">
 <li>Loosely coupled.</li>
-<li>Tiny but powerfull interface.</li>
+<li>Tiny but powerful interface.</li>
 <li>The <a class="reference external" href="http://pypi.python.org/pypi/python-openid/">python-openid</a> library is the only <strong>optional</strong> dependency.</li>
 <li>CSRF protection.</li>
 <li><strong>Framework agnostic</strong> thanks to adapters.</li>
@@ -235,8 +236,7 @@ and there are practically <strong>no tests</strong>!</p>
 <p>Contributions of any kind are very welcome.
 The project is hosted on <a class="reference external" href="https://github.com/peterhudec/authomatic">GitHub</a>.
 If you find this library useful and are using it in your projects,
-please don&#8217;t be shy and leave a comment about your usecase on the
-<a class="reference external" href="https://github.com/peterhudec/authomatic/issues/1">Authomatic Usecases</a> issue.</p>
+please don&#8217;t be shy and leave a comment about your use case on the</p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
@@ -283,7 +283,7 @@ or a link to it inside your app&#8217;s directory.</p>
 <li>Set up the library with <a class="reference internal" href="reference/functions.html#authomatic.setup" title="authomatic.setup"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.setup()</span></tt></a>.</li>
 <li>Log the <strong>user</strong> in by calling <a class="reference internal" href="reference/functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> inside a <em>request handler</em>.</li>
 </ol>
-<p>If everything goes good, you will get a <a class="reference internal" href="reference/classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> object with informations like
+<p>If everything goes good, you will get a <a class="reference internal" href="reference/classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> object with information like
 <a class="reference internal" href="reference/classes.html#authomatic.core.User.name" title="authomatic.core.User.name"><tt class="xref py py-attr docutils literal"><span class="pre">User.name</span></tt></a>, <a class="reference internal" href="reference/classes.html#authomatic.core.User.id" title="authomatic.core.User.id"><tt class="xref py py-attr docutils literal"><span class="pre">User.id</span></tt></a> or <a class="reference internal" href="reference/classes.html#authomatic.core.User.email" title="authomatic.core.User.email"><tt class="xref py py-attr docutils literal"><span class="pre">User.email</span></tt></a>.
 Moreover, if the <strong>user</strong> has logged in with an <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a> or <a class="reference external" href="http://oauth.net/core/1.0a/">OAuth 1.0a</a> provider,
 you will be able to access <strong>his/her protected resources</strong>.</p>
@@ -372,13 +372,13 @@ We will get the provider name from the URL slug.</p>
 </span></pre></div>
 </div>
 <p>The <a class="reference internal" href="reference/functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> function will redirect the <strong>user</strong> to the <strong>provider</strong>,
-which will promt <strong>him/her</strong> to authorize your app (<strong>the consumer</strong>) to access <strong>his/her</strong>
+which will prompt <strong>him/her</strong> to authorize your app (<strong>the consumer</strong>) to access <strong>his/her</strong>
 protected resources (<a class="reference external" href="http://oauth.net/core/1.0a/">OAuth 1.0a</a> and <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a>), or to verify <strong>his/her</strong> claimed ID (<a class="reference external" href="http://openid.net/">OpenID</a>).
 The <strong>provider</strong> then redirects the <strong>user</strong> back to <em>this request handler</em>.</p>
 <p>If the <em>login procedure</em> is over, <a class="reference internal" href="reference/functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> returns a <a class="reference internal" href="reference/classes.html#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-class docutils literal"><span class="pre">LoginResult</span></tt></a>.
 You can check for errors in <a class="reference internal" href="reference/classes.html#authomatic.core.LoginResult.error" title="authomatic.core.LoginResult.error"><tt class="xref py py-attr docutils literal"><span class="pre">LoginResult.error</span></tt></a>
 or in better case for a <a class="reference internal" href="reference/classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> in <a class="reference internal" href="reference/classes.html#authomatic.core.LoginResult.user" title="authomatic.core.LoginResult.user"><tt class="xref py py-attr docutils literal"><span class="pre">LoginResult.user</span></tt></a>.
-The <a class="reference internal" href="reference/classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> object has plenty of usefull properties.</p>
+The <a class="reference internal" href="reference/classes.html#authomatic.core.User" title="authomatic.core.User"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> object has plenty of useful properties.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Do not write anything to the response unless the <em>login procedure</em> is over!
@@ -454,7 +454,7 @@ response content.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">serialized_credentials</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>It would be useles if they could not be deserialized back to original.</p>
+<p>It would be useless if they could not be deserialized back to original.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The deserialization of the credentials is dependent on the <a class="reference internal" href="reference/config.html"><em>Config</em></a>
@@ -483,10 +483,10 @@ Otherwise you must repeat the <a class="reference internal" href="reference/func
 <div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">expire_soon</span><span class="p">():</span>
    <span class="n">response</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
    <span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-      <span class="k">print</span> <span class="s">&#39;Credentials have been refreshed succesfully.&#39;</span>
+      <span class="k">print</span> <span class="s">&#39;Credentials have been refreshed successfully.&#39;</span>
 </pre></div>
 </div>
-<p>Finally use the credentials (serialized or deserialized) to access <strong>protected resourcess</strong> of the <strong>user</strong>
+<p>Finally use the credentials (serialized or deserialized) to access <strong>protected resources</strong> of the <strong>user</strong>
 to whom they belong by passing them to the <a class="reference internal" href="reference/functions.html#authomatic.access" title="authomatic.access"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.access()</span></tt></a> function along with the <strong>resource</strong> URL.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">response</span> <span class="o">=</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="s">&#39;https://graph.facebook.com/{id}?fields=birthday&#39;</span><span class="p">)</span>
 </pre></div>
@@ -519,7 +519,7 @@ there is an <strong>asynchronous</strong> alternative to each of these functions
 <p class="last">The internal implementation of the future pattern is quite naive. Use with caution!</p>
 </div>
 <p>These <strong>asynchronous</strong> alternatives all return a <a class="reference internal" href="reference/classes.html#authomatic.core.Future" title="authomatic.core.Future"><tt class="xref py py-class docutils literal"><span class="pre">Future</span></tt></a> instance which
-represents the separate thread in which their <strong>synchronous</strong> brethrens are running.
+represents the separate thread in which their <strong>synchronous</strong> brethren are running.
 You should call all the <strong>asynchronous</strong> functions you want to use at once,
 then do your <strong>time consuming</strong> tasks and finally collect the results of the functions
 by calling the <a class="reference internal" href="reference/classes.html#authomatic.core.Future.get_result" title="authomatic.core.Future.get_result"><tt class="xref py py-meth docutils literal"><span class="pre">get_result()</span></tt></a> method of each of the
@@ -557,6 +557,11 @@ to store state during the <em>login procedure</em>.
 If you want to use different session implementation you can pass it
 together with its <strong>save method</strong> to the <a class="reference internal" href="reference/functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> function.
 The only requirement is that the session implementation must have a dictionary-like interface.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default <strong>secure cookie</strong> based session will be deleted immediately after
+the <em>login procedure</em> is over. Custom sessions however, will be preserved.</p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">webapp2</span>
 <span class="kn">from</span> <span class="nn">webapp2_extras</span> <span class="kn">import</span> <span class="n">sessions</span>
 <span class="kn">import</span> <span class="nn">authomatic</span>
@@ -604,7 +609,7 @@ You guessed it didn&#8217;t you? There is one in the <a class="reference interna
 <span class="k">class</span> <span class="nc">Login</span><span class="p">(</span><span class="n">webapp2</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
    <span class="k">def</span> <span class="nf">any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">):</span>
 
-      <span class="c"># Wrapps an existing Webapp2 session.</span>
+      <span class="c"># Wraps an existing Webapp2 session.</span>
       <span class="n">session</span> <span class="o">=</span> <span class="n">gae</span><span class="o">.</span><span class="n">Webapp2Session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
 
       <span class="n">result</span> <span class="o">=</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">Webapp2Adapter</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
@@ -656,13 +661,13 @@ which should accept a <tt class="docutils literal"><span class="pre">result</spa
          <span class="c1">// Set up the library</span>
          <span class="nx">authomatic</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span>
             <span class="nx">popupWidth</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
-            <span class="nx">pupupHeight</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+            <span class="nx">popupHeight</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
             <span class="nx">onLoginComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
                <span class="c1">// Handle the login result when the popup closes.</span>
                <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
                   <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Hi &#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-                  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Error occured: &#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+                  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Error occurred: &#39;</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
                <span class="p">}</span>
             <span class="p">}</span>
          <span class="p">});</span>
@@ -707,7 +712,7 @@ Leave alone special request requirements invented by some zealous providers
 on top of the <a class="reference external" href="http://oauth.net/core/1.0a/">OAuth 1.0a</a> and <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a> standards.</p>
 <p>The <a class="reference internal" href="reference/javascript.html#js-access"><em>authomatic.access()</em></a> function of the <a class="reference internal" href="reference/javascript.html#js"><em>javascript.js</em></a> library
 solves this for you. It encapsulates solutions of all the aforementioned issues and
-allways makes the request in the most efficient way.</p>
+always makes the request in the most efficient way.</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">authomatic</span><span class="p">.</span><span class="nx">access</span><span class="p">(</span><span class="nx">loginResult</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">credentials</span><span class="p">,</span> <span class="s1">&#39;https://graph.facebook.com/{id}/feed&#39;</span><span class="p">,{</span>
    <span class="nx">substitute</span><span class="o">:</span> <span class="nx">loginResult</span><span class="p">.</span><span class="nx">user</span><span class="p">,</span> <span class="c1">// replaces the {id} in the URL with loginResult.user.id.</span>
    <span class="nx">onAccessSuccess</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>

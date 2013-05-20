@@ -225,7 +225,7 @@ for a succinct library.
 </div>
 <p>Providers are abstractions of the <strong>provider</strong> party of the
 <strong>provider</strong>/<strong>consumer</strong>/<strong>user</strong> triangle and they are the very core of this library.
-There is no reason for you to instantiate them manualy.
+There is no reason for you to instantiate them manually.
 You only should specify them in the <a class="reference internal" href="config.html"><em>Config</em></a> and access members of their instances
 available in the <a class="reference internal" href="classes.html#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-class docutils literal"><span class="pre">LoginResult</span></tt></a> returned by the <a class="reference internal" href="functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> function.</p>
 <p>Some provider types accept additional keyword arguments in their constructor which you can pass to them
@@ -918,7 +918,7 @@ Use it like this:</p>
         <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;#####&#39;</span><span class="p">,</span>
         <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;#####&#39;</span><span class="p">,</span>
         <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">provider_id</span><span class="p">(),</span>
-<span class="hll">        <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;1024&#39;</span><span class="p">]</span> <span class="c"># Allways a single item.</span>
+<span class="hll">        <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;1024&#39;</span><span class="p">]</span> <span class="c"># Always a single item.</span>
 </span>    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1860,7 +1860,7 @@ are all the items of the <tt class="xref py py-class docutils literal"><span cla
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>request_type</strong> (<em>int</em>) &#8211; Type of the request specified by one of the classe&#8217;s constants.</li>
+<li><strong>request_type</strong> (<em>int</em>) &#8211; Type of the request specified by one of the class&#8217;s constants.</li>
 <li><strong>credentials</strong> &#8211; <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> of the <strong>user</strong> whose
 <strong>protected resource</strong> we want to access.</li>
 <li><strong>url</strong> (<em>str</em>) &#8211; URL of the request.</li>
@@ -1881,7 +1881,7 @@ are all the items of the <tt class="xref py py-class docutils literal"><span cla
 <dl class="attribute">
 <dt id="authomatic.providers.AuthorizationProvider.type_id">
 <tt class="descname">type_id</tt><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.type_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>A short string reprezenting the provider implementation id used for
+<dd><p>A short string representing the provider implementation id used for
 serialization of <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> and to identify the type of provider in JavaScript.
 The part before hyphen denotes the type of the provider, the part after hyphen denotes the class id
 e.g. <tt class="docutils literal"><span class="pre">oauth2.Facebook.type_id</span> <span class="pre">=</span> <span class="pre">'2-5'</span></tt>, <tt class="docutils literal"><span class="pre">oauth1.Twitter.type_id</span> <span class="pre">=</span> <span class="pre">'1-5'</span></tt>.</p>

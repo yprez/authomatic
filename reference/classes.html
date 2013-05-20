@@ -220,7 +220,7 @@ for a succinct library.
 <td>Provides unified interface to selected <strong>user</strong> info returned by different <strong>providers</strong>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.core.Credentials</span></tt></a></td>
-<td>Contains all neccessary informations to fetch <strong>user&#8217;s protected resources</strong>.</td>
+<td>Contains all necessary information to fetch <strong>user&#8217;s protected resources</strong>.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.core.LoginResult</span></tt></a></td>
 <td>Result of the <a class="reference internal" href="functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> function.</td>
@@ -471,7 +471,7 @@ Only present when using the <a class="reference internal" href="providers.html#a
 <dl class="class">
 <dt id="authomatic.core.Credentials">
 <em class="property">class </em><tt class="descclassname">authomatic.core.</tt><tt class="descname">Credentials</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/core.html#Credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.core.Credentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Contains all neccessary informations to fetch <strong>user&#8217;s protected resources</strong>.</p>
+<dd><p>Contains all necessary information to fetch <strong>user&#8217;s protected resources</strong>.</p>
 <dl class="attribute">
 <dt id="authomatic.core.Credentials.token">
 <tt class="descname">token</tt><em class="property"> = None</em><a class="headerlink" href="#authomatic.core.Credentials.token" title="Permalink to this definition">¶</a></dt>
@@ -662,7 +662,7 @@ in the <strong>user authorization request</strong>.</p>
 <dt id="authomatic.core.Credentials.deserialize">
 <em class="property">classmethod </em><tt class="descname">deserialize</tt><big>(</big><em>credentials</em><big>)</big><a class="reference internal" href="../_modules/authomatic/core.html#Credentials.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.core.Credentials.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <em>class method</em> which reconstructs credentials created by <a class="reference internal" href="#authomatic.core.Credentials.serialize" title="authomatic.core.Credentials.serialize"><tt class="xref py py-meth docutils literal"><span class="pre">serialize()</span></tt></a>.
-You can also passit a <a class="reference internal" href="#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> instance.</p>
+You can also pass it a <a class="reference internal" href="#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> instance.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -705,7 +705,7 @@ You can also passit a <a class="reference internal" href="#authomatic.core.Crede
 <ol class="arabic simple">
 <li>Triggers the <tt class="docutils literal"><span class="pre">options.onLoginComplete(result,</span> <span class="pre">closer)</span></tt> handler set with the
 <a class="reference internal" href="javascript.html#js-setup"><em>authomatic.setup()</em></a> function of <a class="reference internal" href="javascript.html#js"><em>javascript.js</em></a>.</li>
-<li>Calls the JavasSript callback specified by <tt class="xref py py-data docutils literal"><span class="pre">callback_name</span></tt>
+<li>Calls the JavasScript callback specified by <tt class="xref py py-data docutils literal"><span class="pre">callback_name</span></tt>
 on the opener of the <em>login handler popup</em> and passes it the
 <em>login result</em> JSON object as first argument and the <cite>closer</cite> function which
 you should call in your callback to close the popup.</li>
@@ -739,7 +739,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, no newlines 
 <ol class="arabic simple">
 <li>Triggers the <tt class="docutils literal"><span class="pre">options.onLoginComplete(result,</span> <span class="pre">closer)</span></tt> handler set with the
 <a class="reference internal" href="javascript.html#js-setup"><em>authomatic.setup()</em></a> function of <a class="reference internal" href="javascript.html#js"><em>javascript.js</em></a>.</li>
-<li>Calls the JavasSript callback specified by <tt class="xref py py-data docutils literal"><span class="pre">callback_name</span></tt>
+<li>Calls the JavasScript callback specified by <tt class="xref py py-data docutils literal"><span class="pre">callback_name</span></tt>
 on the opener of the <em>login handler popup</em> and passes it the
 <em>login result</em> JSON object as first argument and the <cite>closer</cite> function which
 you should call in your callback to close the popup.</li>

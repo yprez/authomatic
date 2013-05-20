@@ -228,7 +228,7 @@ for a succinct library.
 <dt id="authomatic.extras.gae.Webapp2Session">
 <em class="property">class </em><tt class="descclassname">authomatic.extras.gae.</tt><tt class="descname">Webapp2Session</tt><big>(</big><em>handler</em>, <em>session=None</em>, <em>secret=None</em>, <em>cookie_name='webapp2authomatic'</em>, <em>backend='memcache'</em>, <em>config=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/extras/gae.html#Webapp2Session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.extras.gae.Webapp2Session" title="Permalink to this definition">¶</a></dt>
 <dd><p>A simple wrapper for <a class="reference external" href="http://webapp-improved.appspot.com/">Webapp2</a> sessions. If you provide a session
-it wrapps it and adds the <a class="reference internal" href="#authomatic.extras.interfaces.BaseSession.save" title="authomatic.extras.interfaces.BaseSession.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method.</p>
+it wraps it and adds the <a class="reference internal" href="#authomatic.extras.interfaces.BaseSession.save" title="authomatic.extras.interfaces.BaseSession.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method.</p>
 <p>If you don&#8217;t provide a session it creates a new one but you must provide the <tt class="xref py py-data docutils literal"><span class="pre">secret</span></tt>.</p>
 <p>For more about Webapp2 sessions see:
 <a href="#id4"><span class="problematic" id="id5">`http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html`_</span></a>.</p>
@@ -246,7 +246,7 @@ which the <tt class="docutils literal"><span class="pre">'securecookie'</span></
 <li><strong>handler</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">webapp2.RequestHandler</span></tt> instance.</li>
 <li><strong>session</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">webapp2_extras.session.SessionDict</span></tt> instance.</li>
 <li><strong>secret</strong> (<em>str</em>) &#8211; The session secret.</li>
-<li><strong>cookie_name</strong> (<em>str</em>) &#8211; The name of the session kookie.</li>
+<li><strong>cookie_name</strong> (<em>str</em>) &#8211; The name of the session cookie.</li>
 <li><strong>backend</strong> &#8211; The session backend. One of <tt class="docutils literal"><span class="pre">'memcache'</span></tt> or <tt class="docutils literal"><span class="pre">'datastore'</span></tt>.</li>
 <li><strong>config</strong> &#8211; The session config.</li>
 </ul>
