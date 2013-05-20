@@ -221,13 +221,16 @@ for a succinct library.
 </ul>
 </div>
 <p>The <a class="reference internal" href="functions.html#authomatic.login" title="authomatic.login"><tt class="xref py py-func docutils literal"><span class="pre">authomatic.login()</span></tt></a> function needs access to functionality like
-getting the url of the handler where it is called, getting the request params, headers and cookies and
-writing the body, headers and status to the response.</p>
+getting the <strong>URL</strong> of the handler where it is being called, getting the <strong>request params</strong>, <strong>headers</strong> and <strong>cookies</strong> and
+<strong>writing the body</strong>, <strong>headers</strong> and <strong>status</strong> to the response.</p>
 <p>Since implementation of these features varies across Python web frameworks,
 the Authomatic library uses <strong>adapters</strong> to unify these differences into a single interface.</p>
 <div class="section" id="available-adapters">
 <h2>Available Adapters<a class="headerlink" href="#available-adapters" title="Permalink to this headline">¶</a></h2>
-<p>Currently there is only the <a class="reference internal" href="#authomatic.adapters.Webapp2Adapter" title="authomatic.adapters.Webapp2Adapter"><tt class="xref py py-class docutils literal"><span class="pre">Webapp2Adapter</span></tt></a> available.</p>
+<p>If you are missing an adapter for the framework of your choice, which is very likely, since
+currently there is only the <a class="reference internal" href="#authomatic.adapters.Webapp2Adapter" title="authomatic.adapters.Webapp2Adapter"><tt class="xref py py-class docutils literal"><span class="pre">Webapp2Adapter</span></tt></a> available,
+please consider a contribution to this package by <a class="reference internal" href="#implement-adapters"><em>implementing</em></a> one.
+Its very easy and shouldn&#8217;t take you more than a few minutes.</p>
 <dl class="class">
 <dt id="authomatic.adapters.Webapp2Adapter">
 <em class="property">class </em><tt class="descclassname">authomatic.adapters.</tt><tt class="descname">Webapp2Adapter</tt><big>(</big><em>handler</em><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#Webapp2Adapter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.Webapp2Adapter" title="Permalink to this definition">¶</a></dt>
@@ -244,9 +247,9 @@ the Authomatic library uses <strong>adapters</strong> to unify these differences
 
 </div>
 <div class="section" id="implementing-an-adapter">
-<h2>Implementing an Adapter<a class="headerlink" href="#implementing-an-adapter" title="Permalink to this headline">¶</a></h2>
+<span id="implement-adapters"></span><h2>Implementing an Adapter<a class="headerlink" href="#implementing-an-adapter" title="Permalink to this headline">¶</a></h2>
 <p>Implementing an adapter for a Python web framework is pretty easy.</p>
-<p>You do it by subclassing the <a class="reference internal" href="#authomatic.adapters.BaseAdapter" title="authomatic.adapters.BaseAdapter"><tt class="xref py py-class docutils literal"><span class="pre">BaseAdapter</span></tt></a> abstract class.
+<p>Do it by subclassing the <a class="reference internal" href="#authomatic.adapters.BaseAdapter" title="authomatic.adapters.BaseAdapter"><tt class="xref py py-class docutils literal"><span class="pre">BaseAdapter</span></tt></a> abstract class.
 There are only <strong>seven</strong> members that you need to implement.</p>
 <p>Moreover if your framework is based on the <a class="reference external" href="http://webob.org/">WebOb</a> library
 you can subclass the <a class="reference internal" href="#authomatic.adapters.WebObBaseAdapter" title="authomatic.adapters.WebObBaseAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WebObBaseAdapter</span></tt></a> and you only need to
