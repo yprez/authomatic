@@ -57,6 +57,21 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
+    
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var s = document.createElement('script');
+    var t = document.getElementsByTagName('script')[0];
+
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//api.flattr.com/js/0.6/load.js?mode=auto';
+
+    t.parentNode.insertBefore(s, t);
+ })();
+/* ]]> */
+</script>
 
 </head>
 
@@ -183,6 +198,33 @@ for a succinct library.
 	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	    		</li>
+	    		
+	    		<li>
+	    			<iframe src="http://ghbtns.com/github-btn.html?user=peterhudec&repo=authomatic&type=watch&count=true"
+  							allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+	    		</li>
+	    		
+	    		<li>
+	    			<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+					<script type="IN/Share" data-counter="right"></script>
+	    		</li>
+	    		
+	    		<li>
+	    			<a	class="FlattrButton"
+	    				href="http://peterhudec.github.io/foundation-sphinx-theme/cards/html"
+	    				data-flattr-uid="peterhudec"
+	    				data-flattr-category="software"
+	    				data-flattr-button="compact"
+	    				data-flattr-tags=""
+	    				data-flattr-description="Simple yet powerful authorization / authentication client library for Python WEB applications."
+	    				title="Adapters | Authomatic"></a>
+	    		</li>
+	    		
+	    		<li class="reddit">
+	    			<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js">
+	    				reddit_newwindow='1';
+	    			</script>
+	    		</li>
 	    	</ul>
 	    	
 	    </div>
@@ -228,8 +270,8 @@ the Authomatic library uses <strong>adapters</strong> to unify these differences
 <div class="section" id="available-adapters">
 <h2>Available Adapters<a class="headerlink" href="#available-adapters" title="Permalink to this headline">¶</a></h2>
 <p>If you are missing an adapter for the framework of your choice, which is very likely, since
-currently there is only the <a class="reference internal" href="#authomatic.adapters.Webapp2Adapter" title="authomatic.adapters.Webapp2Adapter"><tt class="xref py py-class docutils literal"><span class="pre">Webapp2Adapter</span></tt></a> available,
-please consider a contribution to this package by <a class="reference internal" href="#implement-adapters"><em>implementing</em></a> one.
+currently there are only the <a class="reference internal" href="#authomatic.adapters.Webapp2Adapter" title="authomatic.adapters.Webapp2Adapter"><tt class="xref py py-class docutils literal"><span class="pre">Webapp2Adapter</span></tt></a> and <a class="reference internal" href="#authomatic.adapters.WerkzeugAdapter" title="authomatic.adapters.WerkzeugAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WerkzeugAdapter</span></tt></a> available,
+please consider a contribution to this module by <a class="reference internal" href="#implement-adapters"><em>implementing</em></a> one.
 Its very easy and shouldn&#8217;t take you more than a few minutes.</p>
 <dl class="class">
 <dt id="authomatic.adapters.Webapp2Adapter">
@@ -240,6 +282,25 @@ Its very easy and shouldn&#8217;t take you more than a few minutes.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>handler</strong> &#8211; A <a class="reference external" href="http://webapp-improved.appspot.com/">Webapp2</a> <tt class="xref py py-class docutils literal"><span class="pre">RequestHandler</span></tt> instance.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="authomatic.adapters.WerkzeugAdapter">
+<em class="property">class </em><tt class="descclassname">authomatic.adapters.</tt><tt class="descname">WerkzeugAdapter</tt><big>(</big><em>request</em>, <em>response</em><big>)</big><a class="headerlink" href="#authomatic.adapters.WerkzeugAdapter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adapter for <a class="reference external" href="http://flask.pocoo.org/">Flask</a> and other <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> based frameworks.</p>
+<p>Thanks to <a class="reference external" href="http://marksteve.com">Mark Steve Samson</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>request</strong> &#8211; Instance of the <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> <a class="reference external" href="http://werkzeug.pocoo.org/docs/wrappers/#werkzeug.wrappers.Request">Request</a> class.</li>
+<li><strong>response</strong> &#8211; Instance of the <a class="reference external" href="http://werkzeug.pocoo.org/">Werkzeug</a> <a class="reference external" href="http://werkzeug.pocoo.org/docs/wrappers/#werkzeug.wrappers.Response">Response</a> class.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -259,31 +320,15 @@ override the constructor.</p>
 <em class="property">class </em><tt class="descclassname">authomatic.adapters.</tt><tt class="descname">BaseAdapter</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for platform adapters</p>
 <p>Defines common interface for WSGI framework specific functionality.</p>
-<dl class="method">
-<dt id="authomatic.adapters.BaseAdapter.write">
-<tt class="descname">write</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Must write specified value to response.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>str</em>) &#8211; String to be written to response.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="authomatic.adapters.BaseAdapter.params">
 <tt class="descname">params</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.params" title="Permalink to this definition">¶</a></dt>
-<dd><p>Must return a dictionary of all request parameters of any HTTP method.</p>
+<dd><p>Must return a <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a> of all request parameters of any HTTP method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a></td>
 </tr>
 </tbody>
 </table>
@@ -303,6 +348,48 @@ override the constructor.</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="authomatic.adapters.BaseAdapter.headers">
+<tt class="descname">headers</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Must return the request headers as a <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="authomatic.adapters.BaseAdapter.cookies">
+<tt class="descname">cookies</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.cookies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.cookies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Must return cookies as a <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="authomatic.adapters.BaseAdapter.write">
+<tt class="descname">write</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Must write specified value to response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; String to be written to response.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="authomatic.adapters.BaseAdapter.set_header">
 <tt class="descname">set_header</tt><big>(</big><em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.set_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.set_header" title="Permalink to this definition">¶</a></dt>
@@ -312,8 +399,8 @@ override the constructor.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>key</strong> (<em>str</em>) &#8211; Header name.</li>
-<li><strong>value</strong> (<em>str</em>) &#8211; Header value.</li>
+<li><strong>key</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Header name.</li>
+<li><strong>value</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Header value.</li>
 </ul>
 </td>
 </tr>
@@ -321,22 +408,18 @@ override the constructor.</p>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="authomatic.adapters.BaseAdapter.headers">
-<tt class="descname">headers</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>We need it to retrieve the session cookie.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="authomatic.adapters.BaseAdapter.cookies">
-<tt class="descname">cookies</tt><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.cookies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.cookies" title="Permalink to this definition">¶</a></dt>
-<dd><p>We need it to retrieve the session cookie.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="authomatic.adapters.BaseAdapter.set_status">
-<tt class="descname">set_status</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.set_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.set_status" title="Permalink to this definition">¶</a></dt>
-<dd><p>To set the status in JSON endpoint.</p>
+<tt class="descname">set_status</tt><big>(</big><em>status</em><big>)</big><a class="reference internal" href="../_modules/authomatic/adapters.html#BaseAdapter.set_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.adapters.BaseAdapter.set_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Must set the response status e.g. <tt class="docutils literal"><span class="pre">'302</span> <span class="pre">Found'</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The HTTP response status.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -467,8 +550,10 @@ in the constructor.</p>
 		
 	</script>
 	
-		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
-			<img style="position: absolute; top: 0; right: 0; border: 0;"
+		<a	id="github-ribbon"
+			style="right: 0; border: 0;"
+			href="https://github.com/peterhudec/authomatic">
+			<img
 				 src="../_static/img/github-ribbon-right.png"
 				 alt="Fork me on GitHub">
 		</a>

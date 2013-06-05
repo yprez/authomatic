@@ -57,6 +57,21 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
+    
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var s = document.createElement('script');
+    var t = document.getElementsByTagName('script')[0];
+
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//api.flattr.com/js/0.6/load.js?mode=auto';
+
+    t.parentNode.insertBefore(s, t);
+ })();
+/* ]]> */
+</script>
 
 </head>
 
@@ -183,6 +198,33 @@ for a succinct library.
 	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	    		</li>
+	    		
+	    		<li>
+	    			<iframe src="http://ghbtns.com/github-btn.html?user=peterhudec&repo=authomatic&type=watch&count=true"
+  							allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+	    		</li>
+	    		
+	    		<li>
+	    			<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+					<script type="IN/Share" data-counter="right"></script>
+	    		</li>
+	    		
+	    		<li>
+	    			<a	class="FlattrButton"
+	    				href="http://peterhudec.github.io/foundation-sphinx-theme/cards/html"
+	    				data-flattr-uid="peterhudec"
+	    				data-flattr-category="software"
+	    				data-flattr-button="compact"
+	    				data-flattr-tags=""
+	    				data-flattr-description="Simple yet powerful authorization / authentication client library for Python WEB applications."
+	    				title="Functions | Authomatic"></a>
+	    		</li>
+	    		
+	    		<li class="reddit">
+	    			<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js">
+	    				reddit_newwindow='1';
+	    			</script>
+	    		</li>
 	    	</ul>
 	    	
 	    </div>
@@ -220,109 +262,31 @@ and access <strong>his/her protected resources</strong>.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#authomatic.setup" title="authomatic.setup"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.setup</span></tt></a></td>
-<td>Sets up the Authomatic library.</td>
+<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#authomatic.login" title="authomatic.login"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.login</span></tt></a></td>
-<td>If <tt class="xref py py-data docutils literal"><span class="pre">provider_name</span></tt> specified, launches the login procedure</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#authomatic.provider_id" title="authomatic.provider_id"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.provider_id</span></tt></a></td>
 <td>A simple counter to be used in the config to generate unique <cite>IDs</cite>.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#authomatic.access" title="authomatic.access"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.access</span></tt></a></td>
-<td>Accesses <strong>protected resource</strong> on behalf of the <strong>user</strong>.</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#authomatic.async_access" title="authomatic.async_access"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.async_access</span></tt></a></td>
-<td>Same as <a class="reference internal" href="#authomatic.access" title="authomatic.access"><tt class="xref py py-func docutils literal"><span class="pre">access()</span></tt></a> but runs asynchronously in a separate thread.</td>
+<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#authomatic.credentials" title="authomatic.credentials"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.credentials</span></tt></a></td>
-<td>Deserializes credentials.</td>
+<td></td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#authomatic.request_elements" title="authomatic.request_elements"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.request_elements</span></tt></a></td>
-<td>Creates request elements for accessing <strong>protected resource of a user</strong>.</td>
+<td></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#authomatic.backend" title="authomatic.backend"><tt class="xref py py-obj docutils literal"><span class="pre">authomatic.backend</span></tt></a></td>
-<td>Converts a <em>request handler</em> to a JSON backend which you can use with <a class="reference internal" href="javascript.html#js"><em>authomatic.js</em></a>.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<dl class="function">
-<dt id="authomatic.setup">
-<tt class="descclassname">authomatic.</tt><tt class="descname">setup</tt><big>(</big><em>config</em>, <em>secret</em>, <em>session_max_age=600</em>, <em>secure_cookie=False</em>, <em>session=None</em>, <em>session_save_method=None</em>, <em>report_errors=True</em>, <em>debug=False</em>, <em>logging_level=20</em>, <em>prefix='authomatic'</em>, <em>fetch_headers={}</em><big>)</big><a class="headerlink" href="#authomatic.setup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets up the Authomatic library.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">You MUST call this function if you want to use this library,
-otherwise it just won&#8217;t work!</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>config</strong> (<em>dict</em>) &#8211; <a class="reference internal" href="config.html"><em>Config</em></a></li>
-<li><strong>secret</strong> (<em>str</em>) &#8211; A secret string that will be used as the key for signing <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie and
-as a salt by <em>CSRF</em> token generation.</li>
-<li><strong>session_max_age</strong> &#8211; Maximum allowed age of <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> kookie nonce in seconds.</li>
-<li><strong>secure_cookie</strong> (<em>bool</em>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> the <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie will be saved wit <tt class="docutils literal"><span class="pre">Secure</span></tt> attribute.</li>
-<li><strong>session</strong> &#8211; Custom dictionary-like session implementation.</li>
-<li><strong>session_save_method</strong> (<em>callable</em>) &#8211; A method of the supplied session or any mechanism that saves the session data and cookie.</li>
-<li><strong>report_errors</strong> (<em>bool</em>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> exceptions encountered during the <strong>login procedure</strong>
-will be caught and reported in the <a class="reference internal" href="classes.html#authomatic.core.LoginResult.error" title="authomatic.core.LoginResult.error"><tt class="xref py py-attr docutils literal"><span class="pre">LoginResult.error</span></tt></a> attribute.
-Default is <tt class="docutils literal"><span class="pre">True</span></tt>.</li>
-<li><strong>debug</strong> (<em>bool</em>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> traceback of exceptions will be written to response.
-Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
-<li><strong>logging_level</strong> (<em>int</em>) &#8211; The logging level treshold as specified in the standard Python
-<a class="reference external" href="http://docs.python.org/2/library/logging.html">logging library</a>.
-Default is <tt class="docutils literal"><span class="pre">logging.INFO</span></tt></li>
-<li><strong>prefix</strong> (<em>str</em>) &#8211; Prefix used as the <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie name and
-by which all logs will be prefixed.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="authomatic.login">
-<tt class="descclassname">authomatic.</tt><tt class="descname">login</tt><big>(</big><em>adapter</em>, <em>provider_name</em>, <em>callback=None</em>, <em>session=None</em>, <em>session_saver=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.login" title="Permalink to this definition">¶</a></dt>
-<dd><p>If <tt class="xref py py-data docutils literal"><span class="pre">provider_name</span></tt> specified, launches the login procedure
-for coresponding <a class="reference internal" href="providers.html"><em>provider</em></a> and
-returns <a class="reference internal" href="classes.html#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-class docutils literal"><span class="pre">LoginResult</span></tt></a>.</p>
-<p>If <tt class="xref py py-data docutils literal"><span class="pre">provider_name</span></tt> is empty, acts like <a class="reference internal" href="#authomatic.backend" title="authomatic.backend"><tt class="xref py py-func docutils literal"><span class="pre">backend()</span></tt></a>.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The function redirects the <strong>user</strong> to the <strong>provider</strong> which in turn redirects
-<strong>him/her</strong> back to the <em>request handler</em> where this function was called.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>provider_name</strong> (<em>str</em>) &#8211; Name of the provider as specified in the keys of the <a class="reference internal" href="config.html"><em>Config</em></a>.</li>
-<li><strong>callback</strong> (<em>callable</em>) &#8211; If specified the function will call the callback with <a class="reference internal" href="classes.html#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-class docutils literal"><span class="pre">LoginResult</span></tt></a>
-passed as argument and will return nothing.</li>
-<li><strong>report_errors</strong> (<em>bool</em>) &#8211; </li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Accepts additional keyword arguments that will be passed to <tt class="xref doc docutils literal"><span class="pre">provider</span></tt> constructor.</p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.html#authomatic.core.LoginResult" title="authomatic.core.LoginResult"><tt class="xref py py-class docutils literal"><span class="pre">LoginResult</span></tt></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="function">
 <dt id="authomatic.provider_id">
 <tt class="descclassname">authomatic.</tt><tt class="descname">provider_id</tt><big>(</big><big>)</big><a class="headerlink" href="#authomatic.provider_id" title="Permalink to this definition">¶</a></dt>
@@ -367,199 +331,72 @@ passed as argument and will return nothing.</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="authomatic.setup">
+<tt class="descclassname">authomatic.</tt><tt class="descname">setup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.setup" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use instance of <tt class="xref py py-class docutils literal"><span class="pre">Authomatic</span></tt> class instead.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="authomatic.login">
+<tt class="descclassname">authomatic.</tt><tt class="descname">login</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.login" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.login()</span></tt> method instead.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="authomatic.access">
-<tt class="descclassname">authomatic.</tt><tt class="descname">access</tt><big>(</big><em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers=None</em>, <em>body=''</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="headerlink" href="#authomatic.access" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accesses <strong>protected resource</strong> on behalf of the <strong>user</strong>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>credentials</strong> &#8211; The <strong>user&#8217;s</strong> <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> (serialized or normal).</li>
-<li><strong>url</strong> (<em>str</em>) &#8211; The <strong>protected resource</strong> URL.</li>
-<li><strong>method</strong> (<em>str</em>) &#8211; HTTP method of the request.</li>
-<li><strong>headers</strong> (<em>dict</em>) &#8211; HTTP headers of the request.</li>
-<li><strong>body</strong> (<em>str</em>) &#8211; Body of <tt class="docutils literal"><span class="pre">POST</span></tt>, <tt class="docutils literal"><span class="pre">PUT</span></tt> and <tt class="docutils literal"><span class="pre">PATCH</span></tt> requests.</li>
-<li><strong>max_redirects</strong> (<em>int</em>) &#8211; Maximum number of HTTP redirects to follow.</li>
-<li><strong>content_parser</strong> (<em>function</em>) &#8211; A function to be used to parse the <a class="reference internal" href="classes.html#authomatic.core.Response.data" title="authomatic.core.Response.data"><tt class="xref py py-attr docutils literal"><span class="pre">Response.data</span></tt></a> from <a class="reference internal" href="classes.html#authomatic.core.Response.content" title="authomatic.core.Response.content"><tt class="xref py py-attr docutils literal"><span class="pre">Response.content</span></tt></a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="classes.html#authomatic.core.Response" title="authomatic.core.Response"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt></a></p>
-</td>
-</tr>
-</tbody>
-</table>
+<tt class="descclassname">authomatic.</tt><tt class="descname">access</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.access" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.access()</span></tt> method instead.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="authomatic.async_access">
 <tt class="descclassname">authomatic.</tt><tt class="descname">async_access</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.async_access" title="Permalink to this definition">¶</a></dt>
-<dd><p>Same as <a class="reference internal" href="#authomatic.access" title="authomatic.access"><tt class="xref py py-func docutils literal"><span class="pre">access()</span></tt></a> but runs asynchronously in a separate thread.</p>
-<div class="admonition warning">
+<dd><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The internal implementation of the future pattern is quite naive. Use with caution!</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.async_access()</span></tt> method instead.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.html#authomatic.core.Future" title="authomatic.core.Future"><tt class="xref py py-class docutils literal"><span class="pre">Future</span></tt></a> instance representing the separate thread.</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="authomatic.credentials">
-<tt class="descclassname">authomatic.</tt><tt class="descname">credentials</tt><big>(</big><em>credentials</em><big>)</big><a class="headerlink" href="#authomatic.credentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deserializes credentials.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>credentials</strong> &#8211; Credentials serialized with <a class="reference internal" href="classes.html#authomatic.core.Credentials.serialize" title="authomatic.core.Credentials.serialize"><tt class="xref py py-meth docutils literal"><span class="pre">Credentials.serialize()</span></tt></a> or <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> instance.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a></td>
-</tr>
-</tbody>
-</table>
+<tt class="descclassname">authomatic.</tt><tt class="descname">credentials</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.credentials" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.credentials()</span></tt> method instead.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="authomatic.request_elements">
-<tt class="descclassname">authomatic.</tt><tt class="descname">request_elements</tt><big>(</big><em>credentials=None</em>, <em>url=None</em>, <em>method='GET'</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em>, <em>json_input=None</em>, <em>return_json=False</em><big>)</big><a class="headerlink" href="#authomatic.request_elements" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates request elements for accessing <strong>protected resource of a user</strong>.
-Required arguments are <a class="reference internal" href="#authomatic.credentials" title="authomatic.credentials"><tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt></a> and <tt class="xref py py-data docutils literal"><span class="pre">url</span></tt>.
-You can pass <a class="reference internal" href="#authomatic.credentials" title="authomatic.credentials"><tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt></a>, <tt class="xref py py-data docutils literal"><span class="pre">url</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">method</span></tt>, and <tt class="xref py py-data docutils literal"><span class="pre">params</span></tt>
-as a JSON object.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>credentials</strong> &#8211; The <strong>user&#8217;s</strong> credentials (can be serialized).</li>
-<li><strong>url</strong> (<em>str</em>) &#8211; The url of the protected resource.</li>
-<li><strong>method</strong> (<em>str</em>) &#8211; The HTTP method of the request.</li>
-<li><strong>params</strong> (<em>dict</em>) &#8211; Dictionary of request parameters.</li>
-<li><strong>headers</strong> (<em>dict</em>) &#8211; Dictionary of request headers.</li>
-<li><strong>body</strong> (<em>str</em>) &#8211; Body of <tt class="docutils literal"><span class="pre">POST</span></tt>, <tt class="docutils literal"><span class="pre">PUT</span></tt> and <tt class="docutils literal"><span class="pre">PATCH</span></tt> requests.</li>
-<li><strong>json_input</strong> (<em>str</em>) &#8211; <p>you can pass <a class="reference internal" href="#authomatic.credentials" title="authomatic.credentials"><tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt></a>, <tt class="xref py py-data docutils literal"><span class="pre">url</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">method</span></tt>, <tt class="xref py py-data docutils literal"><span class="pre">params</span></tt> and <tt class="xref py py-data docutils literal"><span class="pre">headers</span></tt>
-in a JSON object. Values from arguments will be used for missing properties.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s">&quot;credentials&quot;</span><span class="p">:</span> <span class="s">&quot;###&quot;</span><span class="p">,</span>
-    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;https://example.com/api&quot;</span><span class="p">,</span>
-    <span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;POST&quot;</span><span class="p">,</span>
-    <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;foo&quot;</span><span class="p">:</span> <span class="s">&quot;bar&quot;</span>
-    <span class="p">},</span>
-    <span class="s">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;baz&quot;</span><span class="p">:</span> <span class="s">&quot;bing&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s">&quot;Bearer ###&quot;</span>
-    <span class="p">},</span>
-    <span class="s">&quot;body&quot;</span><span class="p">:</span> <span class="s">&quot;Foo bar baz bing.&quot;</span>
-<span class="p">}</span>
-</pre></div>
+<tt class="descclassname">authomatic.</tt><tt class="descname">request_elements</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.request_elements" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.request_elements()</span></tt> method instead.</p>
 </div>
-</li>
-<li><strong>return_json</strong> (<em>bool</em>) &#8211; <p>if <tt class="docutils literal"><span class="pre">True</span></tt> the function returns a json object.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s">&quot;url&quot;</span><span class="p">:</span> <span class="s">&quot;https://example.com/api&quot;</span><span class="p">,</span>
-    <span class="s">&quot;method&quot;</span><span class="p">:</span> <span class="s">&quot;POST&quot;</span><span class="p">,</span>
-    <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;access_token&quot;</span><span class="p">:</span> <span class="s">&quot;###&quot;</span><span class="p">,</span>
-        <span class="s">&quot;foo&quot;</span><span class="p">:</span> <span class="s">&quot;bar&quot;</span>
-    <span class="p">},</span>
-    <span class="s">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;baz&quot;</span><span class="p">:</span> <span class="s">&quot;bing&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s">&quot;Bearer ###&quot;</span>
-    <span class="p">},</span>
-    <span class="s">&quot;body&quot;</span><span class="p">:</span> <span class="s">&quot;Foo bar baz bing.&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><tt class="xref py py-class docutils literal"><span class="pre">RequestElements</span></tt> or JSON string.</p>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="authomatic.backend">
-<tt class="descclassname">authomatic.</tt><tt class="descname">backend</tt><big>(</big><em>adapter</em><big>)</big><a class="headerlink" href="#authomatic.backend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a <em>request handler</em> to a JSON backend which you can use with <a class="reference internal" href="javascript.html#js"><em>authomatic.js</em></a>.</p>
-<p>Just call it inside a <em>request handler</em> like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">JSONHandler</span><span class="p">(</span><span class="n">webapp2</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">authomatic</span><span class="o">.</span><span class="n">backend</span><span class="p">(</span><span class="n">Webapp2Adapter</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>adapter</strong> &#8211; The only argument is an <a class="reference internal" href="adapters.html"><em>adapter</em></a>.</td>
-</tr>
-</tbody>
-</table>
-<p>The <em>request handler</em> will now accept these request parameters:</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>type</strong> (<em>str</em>) &#8211; Type of the request. Either <tt class="docutils literal"><span class="pre">auto</span></tt>, <tt class="docutils literal"><span class="pre">fetch</span></tt> or <tt class="docutils literal"><span class="pre">elements</span></tt>. Default is <tt class="docutils literal"><span class="pre">auto</span></tt>.</li>
-<li><strong>credentials</strong> (<em>str</em>) &#8211; Serialized <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a>.</li>
-<li><strong>url</strong> (<em>str</em>) &#8211; URL of the <strong>protected resource</strong> request.</li>
-<li><strong>method</strong> (<em>str</em>) &#8211; HTTP method of the <strong>protected resource</strong> request.</li>
-<li><strong>body</strong> (<em>str</em>) &#8211; HTTP body of the <strong>protected resource</strong> request.</li>
-<li><strong>params</strong> (<em>JSON</em>) &#8211; HTTP params of the <strong>protected resource</strong> request as a JSON object.</li>
-<li><strong>headers</strong> (<em>JSON</em>) &#8211; HTTP headers of the <strong>protected resource</strong> request as a JSON object.</li>
-<li><strong>json</strong> (<em>JSON</em>) &#8211; <p>You can pass all of the aformentioned params except <tt class="docutils literal"><span class="pre">type</span></tt> in a JSON object.</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s2">&quot;credentials&quot;</span><span class="o">:</span> <span class="s2">&quot;######&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;method&quot;</span><span class="o">:</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;headers&quot;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;baz&quot;</span><span class="o">:</span> <span class="s2">&quot;bing&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="s2">&quot;the body of the request&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Depending on the <tt class="docutils literal"><span class="pre">type</span></tt> param, the handler will either write
-a JSON object with <em>request elements</em> to the response,
-and add an <tt class="docutils literal"><span class="pre">Authomatic-Response-To:</span> <span class="pre">elements</span></tt> response header, ...</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="s2">&quot;https://example.com/api&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;method&quot;</span><span class="o">:</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;access_token&quot;</span><span class="o">:</span> <span class="s2">&quot;###&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;headers&quot;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">&quot;baz&quot;</span><span class="o">:</span> <span class="s2">&quot;bing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Authorization&quot;</span><span class="o">:</span> <span class="s2">&quot;Bearer ###&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>... or make a fetch to the <strong>protected resource</strong> and forward it&#8217;s response
-content, status and headers with an additional <tt class="docutils literal"><span class="pre">Authomatic-Response-To:</span> <span class="pre">fetch</span></tt> header
-to the response.</p>
-<div class="admonition warning">
+<tt class="descclassname">authomatic.</tt><tt class="descname">backend</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.backend" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The backend will not work if you write anything to the response in the handler!</p>
+<p class="last">This function is <strong>deprecated</strong> and will be removed in version 0.1.0!
+Use the <tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.backend()</span></tt> method instead.</p>
 </div>
 </dd></dl>
 
@@ -666,8 +503,10 @@ to the response.</p>
 		
 	</script>
 	
-		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
-			<img style="position: absolute; top: 0; right: 0; border: 0;"
+		<a	id="github-ribbon"
+			style="right: 0; border: 0;"
+			href="https://github.com/peterhudec/authomatic">
+			<img
 				 src="../_static/img/github-ribbon-right.png"
 				 alt="Fork me on GitHub">
 		</a>

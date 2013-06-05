@@ -57,6 +57,21 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
+    
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var s = document.createElement('script');
+    var t = document.getElementsByTagName('script')[0];
+
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//api.flattr.com/js/0.6/load.js?mode=auto';
+
+    t.parentNode.insertBefore(s, t);
+ })();
+/* ]]> */
+</script>
 
 </head>
 
@@ -102,6 +117,7 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l2 current"><a class="current reference internal" href="">Extras</a><ul class="dropdown ">
+<li class="toctree-l3"><a class="reference internal" href="#flask-extras">Flask Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gae-extras">Google App Engine Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interfaces">Interfaces</a></li>
 </ul>
@@ -183,6 +199,33 @@ for a succinct library.
 	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	    		</li>
+	    		
+	    		<li>
+	    			<iframe src="http://ghbtns.com/github-btn.html?user=peterhudec&repo=authomatic&type=watch&count=true"
+  							allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+	    		</li>
+	    		
+	    		<li>
+	    			<script src="//platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+					<script type="IN/Share" data-counter="right"></script>
+	    		</li>
+	    		
+	    		<li>
+	    			<a	class="FlattrButton"
+	    				href="http://peterhudec.github.io/foundation-sphinx-theme/cards/html"
+	    				data-flattr-uid="peterhudec"
+	    				data-flattr-category="software"
+	    				data-flattr-button="compact"
+	    				data-flattr-tags=""
+	    				data-flattr-description="Simple yet powerful authorization / authentication client library for Python WEB applications."
+	    				title="Extras | Authomatic"></a>
+	    		</li>
+	    		
+	    		<li class="reddit">
+	    			<script type="text/javascript" src="http://www.reddit.com/static/button/button1.js">
+	    				reddit_newwindow='1';
+	    			</script>
+	    		</li>
 	    	</ul>
 	    	
 	    </div>
@@ -214,13 +257,57 @@ for a succinct library.
 <p class="topic-title first">Contents</p>
 <ul class="simple">
 <li><a class="reference internal" href="#extras" id="id1">Extras</a><ul>
-<li><a class="reference internal" href="#gae-extras" id="id2">Google App Engine Extras</a></li>
-<li><a class="reference internal" href="#interfaces" id="id3">Interfaces</a></li>
+<li><a class="reference internal" href="#flask-extras" id="id2">Flask Extras</a></li>
+<li><a class="reference internal" href="#gae-extras" id="id3">Google App Engine Extras</a></li>
+<li><a class="reference internal" href="#interfaces" id="id4">Interfaces</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<p>Currently the only extra stuff available is for <a class="reference external" href="https://developers.google.com/appengine/">Google App Engine</a>.</p>
+<span class="target" id="module-authomatic.extras.flask"></span><div class="section" id="flask-extras">
+<h2>Flask Extras<a class="headerlink" href="#flask-extras" title="Permalink to this headline">¶</a></h2>
+<p>Utilities you can use when using this library with the <a class="reference external" href="http://flask.pocoo.org/">Flask</a> framework.</p>
+<p>Thanks to <a class="reference external" href="http://marksteve.com">Mark Steve Samson</a>.</p>
+<dl class="class">
+<dt id="authomatic.extras.flask.FlaskAuthomatic">
+<em class="property">class </em><tt class="descclassname">authomatic.extras.flask.</tt><tt class="descname">FlaskAuthomatic</tt><big>(</big><em>config</em>, <em>secret</em>, <em>session_max_age=600</em>, <em>secure_cookie=False</em>, <em>session=None</em>, <em>session_save_method=None</em>, <em>report_errors=True</em>, <em>debug=False</em>, <em>logging_level=20</em>, <em>prefix='authomatic'</em><big>)</big><a class="reference internal" href="../_modules/authomatic/extras/flask.html#FlaskAuthomatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.extras.flask.FlaskAuthomatic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flask Plugin for authomatic support.</p>
+<p>Encapsulates all the functionality of this package.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>config</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; <a class="reference internal" href="config.html"><em>Config</em></a></li>
+<li><strong>secret</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; A secret string that will be used as the key for signing <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie and
+as a salt by <em>CSRF</em> token generation.</li>
+<li><strong>session_max_age</strong> &#8211; Maximum allowed age of <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie nonce in seconds.</li>
+<li><strong>secure_cookie</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> the <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie will be saved wit <tt class="docutils literal"><span class="pre">Secure</span></tt> attribute.</li>
+<li><strong>session</strong> &#8211; Custom dictionary-like session implementation.</li>
+<li><strong>session_save_method</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#callable" title="(in Python v2.7)"><em>callable</em></a>) &#8211; A method of the supplied session or any mechanism that saves the session data and cookie.</li>
+<li><strong>report_errors</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> exceptions encountered during the <strong>login procedure</strong>
+will be caught and reported in the <a class="reference internal" href="classes.html#authomatic.core.LoginResult.error" title="authomatic.core.LoginResult.error"><tt class="xref py py-attr docutils literal"><span class="pre">LoginResult.error</span></tt></a> attribute.
+Default is <tt class="docutils literal"><span class="pre">True</span></tt>.</li>
+<li><strong>debug</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <tt class="docutils literal"><span class="pre">True</span></tt> traceback of exceptions will be written to response.
+Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li>
+<li><strong>logging_level</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The logging level threshold as specified in the standard Python
+<a class="reference external" href="http://docs.python.org/2/library/logging.html">logging library</a>.
+Default is <tt class="docutils literal"><span class="pre">logging.INFO</span></tt></li>
+<li><strong>prefix</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Prefix used as the <tt class="xref py py-class docutils literal"><span class="pre">Session</span></tt> cookie name.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="authomatic.extras.flask.FlaskAuthomatic.login">
+<tt class="descname">login</tt><big>(</big><em>*login_args</em>, <em>**login_kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/extras/flask.html#FlaskAuthomatic.login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.extras.flask.FlaskAuthomatic.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for Flask view functions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <span class="target" id="module-authomatic.extras.gae"></span><div class="section" id="gae-extras">
 <h2>Google App Engine Extras<a class="headerlink" href="#gae-extras" title="Permalink to this headline">¶</a></h2>
 <p>Utilities you can use when using this library on <a class="reference external" href="https://developers.google.com/appengine/">Google App Engine</a>.</p>
@@ -231,7 +318,7 @@ for a succinct library.
 it wraps it and adds the <a class="reference internal" href="#authomatic.extras.interfaces.BaseSession.save" title="authomatic.extras.interfaces.BaseSession.save"><tt class="xref py py-meth docutils literal"><span class="pre">save()</span></tt></a> method.</p>
 <p>If you don&#8217;t provide a session it creates a new one but you must provide the <tt class="xref py py-data docutils literal"><span class="pre">secret</span></tt>.</p>
 <p>For more about Webapp2 sessions see:
-<a href="#id4"><span class="problematic" id="id5">`http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html`_</span></a>.</p>
+<a href="#id5"><span class="problematic" id="id6">`http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html`_</span></a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Do not use the <tt class="docutils literal"><span class="pre">'securecookie'</span></tt> backend with <tt class="xref py py-class docutils literal"><span class="pre">providers.OpenID</span></tt>
@@ -245,8 +332,8 @@ which the <tt class="docutils literal"><span class="pre">'securecookie'</span></
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>handler</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">webapp2.RequestHandler</span></tt> instance.</li>
 <li><strong>session</strong> &#8211; A <tt class="xref py py-class docutils literal"><span class="pre">webapp2_extras.session.SessionDict</span></tt> instance.</li>
-<li><strong>secret</strong> (<em>str</em>) &#8211; The session secret.</li>
-<li><strong>cookie_name</strong> (<em>str</em>) &#8211; The name of the session cookie.</li>
+<li><strong>secret</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The session secret.</li>
+<li><strong>cookie_name</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The name of the session cookie.</li>
 <li><strong>backend</strong> &#8211; The session backend. One of <tt class="docutils literal"><span class="pre">'memcache'</span></tt> or <tt class="docutils literal"><span class="pre">'datastore'</span></tt>.</li>
 <li><strong>config</strong> &#8211; The session config.</li>
 </ul>
@@ -300,7 +387,7 @@ saving the session <strong>data</strong> to storage.</p>
 <dl class="method">
 <dt id="authomatic.extras.interfaces.BaseSession.get">
 <tt class="descname">get</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/authomatic/extras/interfaces.html#BaseSession.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.extras.interfaces.BaseSession.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Same as <tt class="xref py py-meth docutils literal"><span class="pre">dict.get()</span></tt>.</p>
+<dd><p>Same as <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict.get" title="(in Python v2.7)"><tt class="xref py py-meth docutils literal"><span class="pre">dict.get()</span></tt></a>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -318,7 +405,7 @@ saving the session <strong>data</strong> to storage.</p>
 <dl class="method">
 <dt id="authomatic.extras.interfaces.BaseConfig.values">
 <tt class="descname">values</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/authomatic/extras/interfaces.html#BaseConfig.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.extras.interfaces.BaseConfig.values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Same as <tt class="xref py py-meth docutils literal"><span class="pre">dict.values()</span></tt>.</p>
+<dd><p>Same as <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict.values" title="(in Python v2.7)"><tt class="xref py py-meth docutils literal"><span class="pre">dict.values()</span></tt></a>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -351,6 +438,7 @@ saving the session <strong>data</strong> to storage.</p>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Extras</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flask-extras">Flask Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gae-extras">Google App Engine Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interfaces">Interfaces</a></li>
 </ul>
@@ -427,8 +515,10 @@ saving the session <strong>data</strong> to storage.</p>
 		
 	</script>
 	
-		<a id="github-ribbon" href="https://github.com/peterhudec/authomatic">
-			<img style="position: absolute; top: 0; right: 0; border: 0;"
+		<a	id="github-ribbon"
+			style="right: 0; border: 0;"
+			href="https://github.com/peterhudec/authomatic">
+			<img
 				 src="../_static/img/github-ribbon-right.png"
 				 alt="Fork me on GitHub">
 		</a>

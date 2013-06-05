@@ -17,14 +17,14 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 
-	<title>authomatic.providers.gaeopenid | Authomatic</title>
+	<title>authomatic.extras.flask | Authomatic</title>
     	<link rel="icon" type="image/x-icon" href="../../../_static/img/favicon.ico" />
 	
 	
 	
-	<meta property="og:title" content="authomatic.providers.gaeopenid | Authomatic" />
+	<meta property="og:title" content="authomatic.extras.flask | Authomatic" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://peterhudec.github.io/authomatic/_modules/authomatic/providers/gaeopenid.html" />
+	<meta property="og:url" content="http://peterhudec.github.io/authomatic/_modules/authomatic/extras/flask.html" />
 	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
@@ -185,10 +185,10 @@ for a succinct library.
 	    <div class="social-buttons">
 	    	<ul>
 	    		<li>
-	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/_modules/authomatic/providers/gaeopenid.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+	    			<div class="fb-like" data-href="http://peterhudec.github.io/authomatic/_modules/authomatic/extras/flask.html" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
 	    		</li>
 	    		<li>
-	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/_modules/authomatic/providers/gaeopenid.html"></div>
+	    			<div class="g-plusone" data-size="medium" data-href="http://peterhudec.github.io/authomatic/_modules/authomatic/extras/flask.html"></div>
 	    		</li>
 	    		<li>
 	    			<a href="https://twitter.com/share" class="twitter-share-button" data-via="AuthomaticPy">Tweet</a>
@@ -213,7 +213,7 @@ for a succinct library.
 	    				data-flattr-button="compact"
 	    				data-flattr-tags=""
 	    				data-flattr-description="Simple yet powerful authorization / authentication client library for Python WEB applications."
-	    				title="authomatic.providers.gaeopenid | Authomatic"></a>
+	    				title="authomatic.extras.flask | Authomatic"></a>
 	    		</li>
 	    		
 	    		<li class="reddit">
@@ -235,99 +235,52 @@ for a succinct library.
 			
 			<div id="content" class="large-9 push-3 columns">
 				
-  <h1>Source code for authomatic.providers.gaeopenid</h1><div class="highlight"><pre>
+  <h1>Source code for authomatic.extras.flask</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Google App Engine OpenID Providers</span>
-<span class="sd">----------------------------------</span>
+<span class="sd">|flask| Extras</span>
+<span class="sd">------------</span>
 
-<span class="sd">Providers which implement the |openid|_ protocol based on the |gae_users_api|_.</span>
+<span class="sd">Utilities you can use when using this library with the |flask|_ framework.</span>
 
-<span class="sd">.. note::</span>
-
-<span class="sd">    When using the :class:`GAEOpenID` provider, the :class:`user &lt;.core.User&gt;` object</span>
-<span class="sd">    will always have only the</span>
-<span class="sd">    :attr:`user_id &lt;.core.User.user_id&gt;`,</span>
-<span class="sd">    :attr:`email &lt;.core.User.email&gt;`,</span>
-<span class="sd">    :attr:`gae_user &lt;.core.User.gae_user&gt;`</span>
-<span class="sd">    attributes populated with data.</span>
-<span class="sd">    Moreover the :attr:`user_id &lt;.core.User.user_id&gt;` will always be empty on the</span>
-<span class="sd">    `GAE Development Server &lt;https://developers.google.com/appengine/docs/python/tools/devserver&gt;`_.</span>
-
-<span class="sd">.. autosummary::</span>
-<span class="sd">    </span>
-<span class="sd">    GAEOpenID</span>
-<span class="sd">    Yahoo</span>
-<span class="sd">    Google </span>
-
+<span class="sd">Thanks to `Mark Steve Samson &lt;http://marksteve.com&gt;`_.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">google.appengine.api</span> <span class="kn">import</span> <span class="n">users</span>
-<span class="kn">from</span> <span class="nn">authomatic</span> <span class="kn">import</span> <span class="n">providers</span>
-<span class="kn">from</span> <span class="nn">authomatic.exceptions</span> <span class="kn">import</span> <span class="n">FailureError</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">authomatic.core</span> <span class="kn">as</span> <span class="nn">core</span>
-<span class="kn">import</span> <span class="nn">authomatic.settings</span> <span class="kn">as</span> <span class="nn">settings</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GAEOpenID&#39;</span><span class="p">,</span> <span class="s">&#39;Yahoo&#39;</span><span class="p">,</span> <span class="s">&#39;Google&#39;</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 
-<div class="viewcode-block" id="GAEOpenID"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.GAEOpenID">[docs]</a><span class="k">class</span> <span class="nc">GAEOpenID</span><span class="p">(</span><span class="n">providers</span><span class="o">.</span><span class="n">AuthenticationProvider</span><span class="p">):</span>
+<span class="kn">from</span> <span class="nn">authomatic.adapters</span> <span class="kn">import</span> <span class="n">WerkzeugAdapter</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">authomatic</span> <span class="kn">import</span> <span class="n">Authomatic</span>
+
+
+<div class="viewcode-block" id="FlaskAuthomatic"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.flask.FlaskAuthomatic">[docs]</a><span class="k">class</span> <span class="nc">FlaskAuthomatic</span><span class="p">(</span><span class="n">Authomatic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    |openid|_ provider based on the |gae_users_api|_.</span>
-<span class="sd">    </span>
-<span class="sd">    Accepts additional keyword arguments inherited from :class:`.AuthenticationProvider`.</span>
+<span class="sd">    Flask Plugin for authomatic support.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="nd">@providers.login_decorator</span>
-    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Launches the OpenID authentication procedure.&quot;&quot;&quot;</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="FlaskAuthomatic.login"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.flask.FlaskAuthomatic.login">[docs]</a>    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">login_args</span><span class="p">,</span> <span class="o">**</span><span class="n">login_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator for Flask view functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="k">if</span> <span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier_param</span><span class="p">):</span>
-            <span class="c">#===================================================================</span>
-            <span class="c"># Phase 1 before redirect.</span>
-            <span class="c">#===================================================================</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Starting OpenID authentication procedure.&#39;</span><span class="p">)</span>
-            
-            <span class="n">url</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">create_login_url</span><span class="p">(</span><span class="n">dest_url</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">federated_identity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
-            
-            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Redirecting user to {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-            
-            <span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c">#===================================================================</span>
-            <span class="c"># Phase 2 after redirect.</span>
-            <span class="c">#===================================================================</span>
-            
-            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Continuing OpenID authentication procedure after redirect.&#39;</span><span class="p">)</span>
-            
-            <span class="n">user</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">get_current_user</span><span class="p">()</span>
-            
-            <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Authentication successful.&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Creating user.&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">User</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                     <span class="nb">id</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">federated_identity</span><span class="p">(),</span>
-                                     <span class="n">email</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">(),</span>
-                                     <span class="n">gae_user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
-                
-                <span class="c">#===============================================================</span>
-                <span class="c"># We&#39;re done</span>
-                <span class="c">#===============================================================</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">FailureError</span><span class="p">(</span><span class="s">&#39;Unable to authenticate identifier &quot;{}&quot;!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
+        <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">()</span>
+                <span class="n">adapter</span> <span class="o">=</span> <span class="n">WerkzeugAdapter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">)</span>
+                <span class="n">login_kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;session&#39;</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+                <span class="n">login_kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;session_saver&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_saver</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">FlaskAuthomatic</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="o">*</span><span class="n">login_args</span><span class="p">,</span> <span class="o">**</span><span class="n">login_kwargs</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">decorated</span>
+        <span class="k">return</span> <span class="n">decorator</span>
 </div>
-<div class="viewcode-block" id="Yahoo"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.Yahoo">[docs]</a><span class="k">class</span> <span class="nc">Yahoo</span><span class="p">(</span><span class="n">GAEOpenID</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` predefined to ``&quot;me.yahoo.com&quot;``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;me.yahoo.com&#39;</span>
-</div>
-<div class="viewcode-block" id="Google"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.Google">[docs]</a><span class="k">class</span> <span class="nc">Google</span><span class="p">(</span><span class="n">GAEOpenID</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` predefined to ``&quot;https://www.google.com/accounts/o8/id&quot;``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;https://www.google.com/accounts/o8/id&#39;</span></div>
+    <span class="k">def</span> <span class="nf">session_saver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">modified</span> <span class="o">=</span> <span class="bp">True</span></div>
 </pre></div>
 
 			</div>
