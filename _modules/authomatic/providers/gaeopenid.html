@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../../../_static/underscore.js"></script>
     	<script type="text/javascript" src="../../../_static/doctools.js"></script>
     	<script type="text/javascript" src="../../../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -173,7 +173,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -236,21 +236,22 @@ for a succinct library.
 			<div id="content" class="large-9 push-3 columns">
 				
   <h1>Source code for authomatic.providers.gaeopenid</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Google App Engine OpenID Providers</span>
 <span class="sd">----------------------------------</span>
 
-<span class="sd">Providers which implement the |openid|_ protocol based on the |gae_users_api|_.</span>
+<span class="sd">|openid|_ provider implementations based on the |gae_users_api|_.</span>
 
 <span class="sd">.. note::</span>
 
-<span class="sd">    When using the :class:`GAEOpenID` provider, the :class:`user &lt;.core.User&gt;` object</span>
+<span class="sd">    When using the :class:`GAEOpenID` provider, the :class:`.User` object</span>
 <span class="sd">    will always have only the</span>
-<span class="sd">    :attr:`user_id &lt;.core.User.user_id&gt;`,</span>
-<span class="sd">    :attr:`email &lt;.core.User.email&gt;`,</span>
-<span class="sd">    :attr:`gae_user &lt;.core.User.gae_user&gt;`</span>
+<span class="sd">    :attr:`.User.user_id`,</span>
+<span class="sd">    :attr:`.User.email`,</span>
+<span class="sd">    :attr:`.User.gae_user`</span>
 <span class="sd">    attributes populated with data.</span>
-<span class="sd">    Moreover the :attr:`user_id &lt;.core.User.user_id&gt;` will always be empty on the</span>
+<span class="sd">    Moreover the :attr:`.User.user_id` will always be empty on the</span>
 <span class="sd">    `GAE Development Server &lt;https://developers.google.com/appengine/docs/python/tools/devserver&gt;`_.</span>
 
 <span class="sd">.. autosummary::</span>
@@ -261,14 +262,17 @@ for a succinct library.
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">logging</span>
+
 <span class="kn">from</span> <span class="nn">google.appengine.api</span> <span class="kn">import</span> <span class="n">users</span>
+
+<span class="kn">import</span> <span class="nn">authomatic.core</span> <span class="kn">as</span> <span class="nn">core</span>
 <span class="kn">from</span> <span class="nn">authomatic</span> <span class="kn">import</span> <span class="n">providers</span>
 <span class="kn">from</span> <span class="nn">authomatic.exceptions</span> <span class="kn">import</span> <span class="n">FailureError</span>
-<span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">authomatic.core</span> <span class="kn">as</span> <span class="nn">core</span>
-<span class="kn">import</span> <span class="nn">authomatic.settings</span> <span class="kn">as</span> <span class="nn">settings</span>
+
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GAEOpenID&#39;</span><span class="p">,</span> <span class="s">&#39;Yahoo&#39;</span><span class="p">,</span> <span class="s">&#39;Google&#39;</span><span class="p">]</span>
+
 
 <div class="viewcode-block" id="GAEOpenID"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.GAEOpenID">[docs]</a><span class="k">class</span> <span class="nc">GAEOpenID</span><span class="p">(</span><span class="n">providers</span><span class="o">.</span><span class="n">AuthenticationProvider</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -281,17 +285,17 @@ for a succinct library.
     <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Launches the OpenID authentication procedure.&quot;&quot;&quot;</span>
         
-        <span class="k">if</span> <span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier_param</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier_param</span><span class="p">):</span>
             <span class="c">#===================================================================</span>
             <span class="c"># Phase 1 before redirect.</span>
             <span class="c">#===================================================================</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Starting OpenID authentication procedure.&#39;</span><span class="p">)</span>
             
-            <span class="n">url</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">create_login_url</span><span class="p">(</span><span class="n">dest_url</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">federated_identity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">users</span><span class="o">.</span><span class="n">create_login_url</span><span class="p">(</span><span class="n">dest_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">federated_identity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">)</span>
             
             <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Redirecting user to {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
             
-            <span class="n">core</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">redirect</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c">#===================================================================</span>
             <span class="c"># Phase 2 after redirect.</span>
@@ -314,17 +318,19 @@ for a succinct library.
                 <span class="c">#===============================================================</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">FailureError</span><span class="p">(</span><span class="s">&#39;Unable to authenticate identifier &quot;{}&quot;!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identifier</span><span class="p">))</span>
+
 </div>
 <div class="viewcode-block" id="Yahoo"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.Yahoo">[docs]</a><span class="k">class</span> <span class="nc">Yahoo</span><span class="p">(</span><span class="n">GAEOpenID</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` predefined to ``&quot;me.yahoo.com&quot;``.</span>
+<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` set to ``&quot;me.yahoo.com&quot;``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;me.yahoo.com&#39;</span>
+
 </div>
 <div class="viewcode-block" id="Google"><a class="viewcode-back" href="../../../reference/providers.html#authomatic.providers.gaeopenid.Google">[docs]</a><span class="k">class</span> <span class="nc">Google</span><span class="p">(</span><span class="n">GAEOpenID</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` predefined to ``&quot;https://www.google.com/accounts/o8/id&quot;``.</span>
+<span class="sd">    :class:`.GAEOpenID` provider with the :attr:`.identifier` set to ``&quot;https://www.google.com/accounts/o8/id&quot;``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">identifier</span> <span class="o">=</span> <span class="s">&#39;https://www.google.com/accounts/o8/id&#39;</span></div>
@@ -363,9 +369,10 @@ for a succinct library.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>

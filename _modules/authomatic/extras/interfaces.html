@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../../../_static/underscore.js"></script>
     	<script type="text/javascript" src="../../../_static/doctools.js"></script>
     	<script type="text/javascript" src="../../../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -173,7 +173,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -236,6 +236,7 @@ for a succinct library.
 			<div id="content" class="large-9 push-3 columns">
 				
   <h1>Source code for authomatic.extras.interfaces</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Interfaces</span>
 <span class="sd">^^^^^^^^^^</span>
@@ -245,6 +246,7 @@ for a succinct library.
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
+
 
 <div class="viewcode-block" id="BaseSession"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.interfaces.BaseSession">[docs]</a><span class="k">class</span> <span class="nc">BaseSession</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -267,9 +269,6 @@ for a succinct library.
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Same as :meth:`dict.__setitem__`.</span>
-<span class="sd">        </span>
-<span class="sd">        :param key:</span>
-<span class="sd">        :param value:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     
     
@@ -277,8 +276,6 @@ for a succinct library.
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Same as :meth:`dict.__getitem__`.</span>
-<span class="sd">        </span>
-<span class="sd">        :param key:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     
     
@@ -286,8 +283,6 @@ for a succinct library.
     <span class="k">def</span> <span class="nf">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Same as :meth:`dict.__delitem__`.</span>
-<span class="sd">        </span>
-<span class="sd">        :param key:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     
     
@@ -295,8 +290,6 @@ for a succinct library.
 <div class="viewcode-block" id="BaseSession.get"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.interfaces.BaseSession.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Same as :meth:`dict.get`.</span>
-<span class="sd">        </span>
-<span class="sd">        :param key:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
 </div></div>
@@ -311,8 +304,6 @@ for a succinct library.
 <div class="viewcode-block" id="BaseConfig.get"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.interfaces.BaseConfig.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Same as :attr:`dict.get`.</span>
-<span class="sd">        </span>
-<span class="sd">        :param key:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     </div>
     <span class="nd">@abc.abstractmethod</span>
@@ -355,9 +346,10 @@ for a succinct library.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>

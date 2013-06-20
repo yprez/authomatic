@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="dropdown current">
+<li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -139,7 +139,7 @@
 	<li class="divider"></li>
 
 	
-		<li><a href="index.html"  title="Tutorials / Examples">&laquo; previous</a></li>
+		<li><a href="flask-simple.html"  title="Simple Flask Example">&laquo; previous</a></li>
 	
 		
 			<li><a href="../genindex.html"  title="General Index">index</a></li>
@@ -179,7 +179,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -255,9 +255,21 @@ for a succinct library.
   <div class="section" id="simple-webapp2-gae-example">
 <h1>Simple Webapp2 Google App Engine Example<a class="headerlink" href="#simple-webapp2-gae-example" title="Permalink to this headline">¶</a></h1>
 <p>In this tutorial we will create a simple <a class="reference external" href="https://developers.google.com/appengine/">Google App Engine</a> <a class="reference external" href="http://webapp-improved.appspot.com/">Webapp2</a> application
-that will be able to log the <strong>user</strong> in with Facebook, Twitter and <a class="reference external" href="http://openid.net/">OpenID</a>
-and retrieve the <strong>user&#8217;s</strong> 5 most recent tweets/statuses.</p>
-<p>First create the <a class="reference internal" href="../reference/config.html"><em>Config</em></a> dictionary:</p>
+that will be able to log <strong>users</strong> in with Facebook, Twitter and <a class="reference external" href="http://openid.net/">OpenID</a>
+and retrieve their 5 most recent tweets/statuses.</p>
+<p>You can download all the source files we are about to create
+<a class="reference external" href="https://github.com/peterhudec/authomatic/tree/master/examples/gae/simple">here</a>.</p>
+<p>First create the <a class="reference internal" href="../reference/config.html"><em>Config</em></a> dictionary where you set up all the providers you want to use.
+Yo will need the <tt class="docutils literal"><span class="pre">consumer_key</span></tt> and <tt class="docutils literal"><span class="pre">consumer_secret</span></tt> which you can get
+<a class="reference external" href="https://developers.facebook.com/apps">here</a> for Facebook and
+<a class="reference external" href="https://dev.twitter.com/apps">here</a> for Twitter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Facebook and other OAuth 2.0 providers require a <strong>redirect URI</strong>
+which should be the URL of the <em>login request handler</em>
+which we will create in this tutorial and whose walue in our case will be
+<tt class="docutils literal"><span class="pre">http://[hostname]:[port]/login/fb</span></tt> for Facebook.</p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># config.py</span>
 
 <span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">oauth2</span><span class="p">,</span> <span class="n">oauth1</span><span class="p">,</span> <span class="n">openid</span><span class="p">,</span> <span class="n">gaeopenid</span>
@@ -266,44 +278,44 @@ and retrieve the <strong>user&#8217;s</strong> 5 most recent tweets/statuses.</p
     
     <span class="s">&#39;tw&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c"># Your internal provider name</span>
            
-           <span class="c"># Provider class</span>
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth1</span><span class="o">.</span><span class="n">Twitter</span><span class="p">,</span>
-           
-           <span class="c"># Twitter is an AuthorizationProvider so we need to set several other properties too:</span>
-           <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="c"># Provider class</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth1</span><span class="o">.</span><span class="n">Twitter</span><span class="p">,</span>
+        
+        <span class="c"># Twitter is an AuthorizationProvider so we need to set several other properties too:</span>
+        <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
     <span class="p">},</span>
     
     <span class="s">&#39;fb&#39;</span><span class="p">:</span> <span class="p">{</span>
            
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">Facebook</span><span class="p">,</span>
-           
-           <span class="c"># Facebook is an AuthorizationProvider too.</span>
-           <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           
-           <span class="c"># But it is also an OAuth 2.0 provider and it needs scope.</span>
-           <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;user_about_me&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;publish_stream&#39;</span><span class="p">],</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">Facebook</span><span class="p">,</span>
+        
+        <span class="c"># Facebook is an AuthorizationProvider too.</span>
+        <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        
+        <span class="c"># But it is also an OAuth 2.0 provider and it needs scope.</span>
+        <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;user_about_me&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;publish_stream&#39;</span><span class="p">],</span>
     <span class="p">},</span>
     
     <span class="s">&#39;gae_oi&#39;</span><span class="p">:</span> <span class="p">{</span>
            
-           <span class="c"># OpenID based Google App Engine Users API works only on GAE</span>
-           <span class="c"># and returns only the id and email of a user.</span>
-           <span class="c"># Moreover, the id is not available in the development environment!</span>
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">gaeopenid</span><span class="o">.</span><span class="n">GAEOpenID</span><span class="p">,</span>
+        <span class="c"># OpenID provider based on Google App Engine Users API.</span>
+        <span class="c"># Works only on GAE and returns only the id and email of a user.</span>
+        <span class="c"># Moreover, the id is not available in the development environment!</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">gaeopenid</span><span class="o">.</span><span class="n">GAEOpenID</span><span class="p">,</span>
     <span class="p">},</span>
     
     <span class="s">&#39;oi&#39;</span><span class="p">:</span> <span class="p">{</span>
            
-           <span class="c"># OpenID based on python-openid library works everywhere,</span>
-           <span class="c"># is flexible, but requires more resources.</span>
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">openid</span><span class="o">.</span><span class="n">OpenID</span><span class="p">,</span>
+        <span class="c"># OpenID provider based on the python-openid library.</span>
+        <span class="c"># Works everywhere, is flexible, but requires more resources.</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">openid</span><span class="o">.</span><span class="n">OpenID</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Create <tt class="docutils literal"><span class="pre">main.py</span></tt> file and import what&#8217;s needed. We don&#8217;t need much.</p>
+<p>Create <tt class="docutils literal"><span class="pre">main.py</span></tt> file and import what&#8217;s needed.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># main.py</span>
 
 <span class="kn">import</span> <span class="nn">webapp2</span>
@@ -488,7 +500,12 @@ but you can change its name to whatever you want.</p>
   <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">main.app</span>
 </pre></div>
 </div>
-<p>And here is the complete app:</p>
+<p>That&#8217;s it. Now just run the application.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python dev_appserver.py <span class="o">[</span>path to the root folder of this app<span class="o">]</span>
+</pre></div>
+</div>
+<p>And here is the complete app. Remember that you can download all the files we just created from
+<a class="reference external" href="https://github.com/peterhudec/authomatic/tree/master/examples/gae/simple">GitHub</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># main.py</span>
 
 <span class="kn">import</span> <span class="nn">webapp2</span>
@@ -668,9 +685,10 @@ but you can change its name to whatever you want.</p>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -680,7 +698,7 @@ but you can change its name to whatever you want.</p>
 		</div>
 		
 		<div id="root_footer"></div>
-	</div><div id="footer"><div id="bottom-nav"><span><a href="index.html"  title="Tutorials / Examples">&laquo; previous</a></span>
+	</div><div id="footer"><div id="bottom-nav"><span><a href="flask-simple.html"  title="Simple Flask Example">&laquo; previous</a></span>
 			<span><a href="../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../py-modindex.html"  title="Python Module Index">modules</a></span>
 				<span><a href="credentials.html"  title="Advanced Webapp2 Google App Engine Example">next &raquo;</a></span></div><div id="footer-notice">

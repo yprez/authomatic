@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="dropdown current">
+<li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -139,7 +139,7 @@
 	<li class="divider"></li>
 
 	
-		<li><a href="credentials.html"  title="Advanced Webapp2 Google App Engine Example">&laquo; previous</a></li>
+		<li><a href="django-simple.html"  title="Simple Django Example">&laquo; previous</a></li>
 	
 		
 			<li><a href="../genindex.html"  title="General Index">index</a></li>
@@ -148,7 +148,10 @@
 			<li><a href="../py-modindex.html"  title="Python Module Index">modules</a></li>
 		
 		
+		
 
+	
+		<li><a href="simple.html"  title="Simple Webapp2 Google App Engine Example">next &raquo;</a></li>
 	
 					</ul>
 				</section>
@@ -176,7 +179,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -231,6 +234,17 @@ for a succinct library.
 		
 		
 		<div class="row">
+	
+		<ul class="breadcrumbs">
+			
+		  	<li><a href="../index.html">Authomatic</a></li>
+
+		  	
+		  		<li><a href="index.html">Tutorials / Examples</a></li>
+
+		  	
+			<li class="current"><a href="">Simple Flask Example</a></li>
+		</ul>
 	</div>
 		
 		
@@ -244,7 +258,19 @@ for a succinct library.
 which will use <strong>Authomatic</strong> with <a class="reference internal" href="../reference/adapters.html#authomatic.adapters.WerkzeugAdapter" title="authomatic.adapters.WerkzeugAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WerkzeugAdapter</span></tt></a>
 to log <strong>users</strong> in with Facebook, Twitter and <a class="reference external" href="http://openid.net/">OpenID</a>
 and retrieve their recent tweets/statuses.</p>
-<p>First create the <a class="reference internal" href="../reference/config.html"><em>Config</em></a> dictionary:</p>
+<p>You can download all the source files we are about to create
+<a class="reference external" href="https://github.com/peterhudec/authomatic/tree/master/examples/flask/werkzeug_adapter">here</a>.</p>
+<p>First create the <a class="reference internal" href="../reference/config.html"><em>Config</em></a> dictionary where you set up all the providers you want to use.
+Yo will need the <tt class="docutils literal"><span class="pre">consumer_key</span></tt> and <tt class="docutils literal"><span class="pre">consumer_secret</span></tt> which you can get
+<a class="reference external" href="https://developers.facebook.com/apps">here</a> for Facebook and
+<a class="reference external" href="https://dev.twitter.com/apps">here</a> for Twitter.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Facebook and other OAuth 2.0 providers require a <strong>redirect URI</strong>
+which should be the URL of the <em>login request handler</em>
+which we will create in this tutorial and whose walue in our case will be
+<tt class="docutils literal"><span class="pre">http://[hostname]/login/fb</span></tt> for Facebook.</p>
+</div>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># config.py</span>
 
 <span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">oauth2</span><span class="p">,</span> <span class="n">oauth1</span><span class="p">,</span> <span class="n">openid</span><span class="p">,</span> <span class="n">gaeopenid</span>
@@ -253,31 +279,30 @@ and retrieve their recent tweets/statuses.</p>
     
     <span class="s">&#39;tw&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c"># Your internal provider name</span>
            
-           <span class="c"># Provider class</span>
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth1</span><span class="o">.</span><span class="n">Twitter</span><span class="p">,</span>
-           
-           <span class="c"># Twitter is an AuthorizationProvider so we need to set several other properties too:</span>
-           <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="c"># Provider class</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth1</span><span class="o">.</span><span class="n">Twitter</span><span class="p">,</span>
+        
+        <span class="c"># Twitter is an AuthorizationProvider so we need to set several other properties too:</span>
+        <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
     <span class="p">},</span>
     
     <span class="s">&#39;fb&#39;</span><span class="p">:</span> <span class="p">{</span>
            
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">Facebook</span><span class="p">,</span>
-           
-           <span class="c"># Facebook is an AuthorizationProvider too.</span>
-           <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
-           
-           <span class="c"># But it is also an OAuth 2.0 provider and it needs scope.</span>
-           <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;user_about_me&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;publish_stream&#39;</span><span class="p">],</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">Facebook</span><span class="p">,</span>
+        
+        <span class="c"># Facebook is an AuthorizationProvider too.</span>
+        <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;########################&#39;</span><span class="p">,</span>
+        
+        <span class="c"># But it is also an OAuth 2.0 provider and it needs scope.</span>
+        <span class="s">&#39;scope&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;user_about_me&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;publish_stream&#39;</span><span class="p">],</span>
     <span class="p">},</span>
     
     <span class="s">&#39;oi&#39;</span><span class="p">:</span> <span class="p">{</span>
            
-           <span class="c"># OpenID based on python-openid library works everywhere,</span>
-           <span class="c"># is flexible, but requires more resources.</span>
-           <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">openid</span><span class="o">.</span><span class="n">OpenID</span><span class="p">,</span>
+        <span class="c"># OpenID provider dependent on the python-openid package.</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">openid</span><span class="o">.</span><span class="n">OpenID</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -306,7 +331,8 @@ provider which we have configured in the <a class="reference internal" href="../
 <p>Now just Log the <strong>user</strong> in by calling the <a class="reference internal" href="../reference/classes.html#authomatic.Authomatic.login" title="authomatic.Authomatic.login"><tt class="xref py py-meth docutils literal"><span class="pre">Authomatic.login()</span></tt></a> method inside the <em>login</em> handler.
 You must pass it the <a class="reference internal" href="../reference/adapters.html#authomatic.adapters.WerkzeugAdapter" title="authomatic.adapters.WerkzeugAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WerkzeugAdapter</span></tt></a>
 and the <tt class="docutils literal"><span class="pre">provider_name</span></tt> URL variable.
-The <a class="reference internal" href="../reference/adapters.html#authomatic.adapters.WerkzeugAdapter" title="authomatic.adapters.WerkzeugAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WerkzeugAdapter</span></tt></a> needs <a class="reference external" href="http://flask.pocoo.org/">Flask</a> <tt class="docutils literal"><span class="pre">request</span></tt> and <tt class="docutils literal"><span class="pre">response</span></tt> objects.
+The <a class="reference internal" href="../reference/adapters.html#authomatic.adapters.WerkzeugAdapter" title="authomatic.adapters.WerkzeugAdapter"><tt class="xref py py-class docutils literal"><span class="pre">WerkzeugAdapter</span></tt></a> needs instances of <a class="reference external" href="http://werkzeug.pocoo.org/docs/wrappers/#werkzeug.wrappers.Request" title="(in Werkzeug v0.10)"><tt class="xref py py-class docutils literal"><span class="pre">werkzeug.wrappers.Request</span></tt></a>
+and <a class="reference external" href="http://werkzeug.pocoo.org/docs/wrappers/#werkzeug.wrappers.Response" title="(in Werkzeug v0.10)"><tt class="xref py py-class docutils literal"><span class="pre">werkzeug.wrappers.Response</span></tt></a> classes.
 The handler must return the <tt class="docutils literal"><span class="pre">response</span></tt> so we assign it to a variable.</p>
 <div class="highlight-python"><div class="highlight"><pre>    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">()</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">WerkzeugAdapter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">),</span> <span class="n">provider_name</span><span class="p">)</span>
@@ -460,7 +486,13 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="nv">body</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>Here is the complete <tt class="docutils literal"><span class="pre">login.html</span></tt> template.</p>
+<p>That&#8217;s it. Now just run the application.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python main.py
+</pre></div>
+</div>
+<p>Here is the complete <tt class="docutils literal"><span class="pre">login.html</span></tt> template.
+Remember that you can download all the files we just created from
+<a class="reference external" href="https://github.com/peterhudec/authomatic/tree/master/examples/flask/werkzeug_adapter">GitHub</a>.</p>
 <div class="highlight-html+jinja"><div class="highlight"><pre><span class="c">{# index.html #}</span>
 <span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
@@ -541,7 +573,7 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="nv">body</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>And here the whole <tt class="docutils literal"><span class="pre">main.py</span></tt> module.</p>
+<p>And here is the whole <tt class="docutils literal"><span class="pre">main.py</span></tt> module.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This is a simple Flask app that uses Authomatic to log users in with Facebook Twitter and OpenID.</span>
@@ -598,10 +630,6 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>That&#8217;s it. Now just run the application.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python main.py
-</pre></div>
-</div>
 </div>
 
 
@@ -638,9 +666,10 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -650,10 +679,10 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 		</div>
 		
 		<div id="root_footer"></div>
-	</div><div id="footer"><div id="bottom-nav"><span><a href="credentials.html"  title="Advanced Webapp2 Google App Engine Example">&laquo; previous</a></span>
+	</div><div id="footer"><div id="bottom-nav"><span><a href="django-simple.html"  title="Simple Django Example">&laquo; previous</a></span>
 			<span><a href="../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../py-modindex.html"  title="Python Module Index">modules</a></span>
-				</div><div id="footer-notice">
+				<span><a href="simple.html"  title="Simple Webapp2 Google App Engine Example">next &raquo;</a></span></div><div id="footer-notice">
 			    	&copy; Copyright 2012,
 			    	
 			    		<a href="http://peterhudec.com">Peter Hudec</a>

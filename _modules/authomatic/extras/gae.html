@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../../../_static/underscore.js"></script>
     	<script type="text/javascript" src="../../../_static/doctools.js"></script>
     	<script type="text/javascript" src="../../../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -173,7 +173,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -236,6 +236,7 @@ for a succinct library.
 			<div id="content" class="large-9 push-3 columns">
 				
   <h1>Source code for authomatic.extras.gae</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">|gae| Extras</span>
 <span class="sd">------------</span>
@@ -243,14 +244,19 @@ for a succinct library.
 <span class="sd">Utilities you can use when using this library on |gae|_.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">authomatic</span> <span class="kn">import</span> <span class="n">exceptions</span>
-<span class="kn">from</span> <span class="nn">authomatic.extras</span> <span class="kn">import</span> <span class="n">interfaces</span>
-<span class="kn">from</span> <span class="nn">google.appengine.ext</span> <span class="kn">import</span> <span class="n">ndb</span>
-<span class="kn">from</span> <span class="nn">webapp2_extras</span> <span class="kn">import</span> <span class="n">sessions</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
+<span class="kn">from</span> <span class="nn">google.appengine.ext</span> <span class="kn">import</span> <span class="n">ndb</span>
+<span class="kn">from</span> <span class="nn">webapp2_extras</span> <span class="kn">import</span> <span class="n">sessions</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ndb_config&#39;</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">authomatic</span> <span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">authomatic.core</span> <span class="kn">import</span> <span class="n">resolve_provider_class</span>
+<span class="kn">from</span> <span class="nn">authomatic.extras</span> <span class="kn">import</span> <span class="n">interfaces</span>
+<span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">openid</span>
+<span class="kn">from</span> <span class="nn">authomatic.extras.gae.openid</span> <span class="kn">import</span> <span class="n">NDBOpenIDStore</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;ndb_config&#39;</span><span class="p">,</span> <span class="s">&#39;Webapp2Session&#39;</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">GAEError</span><span class="p">(</span><span class="n">exceptions</span><span class="o">.</span><span class="n">BaseError</span><span class="p">):</span>
@@ -258,16 +264,19 @@ for a succinct library.
 
 
 <div class="viewcode-block" id="Webapp2Session"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.gae.Webapp2Session">[docs]</a><span class="k">class</span> <span class="nc">Webapp2Session</span><span class="p">(</span><span class="n">interfaces</span><span class="o">.</span><span class="n">BaseSession</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple wrapper for |webapp2|_ sessions. If you provide a session</span>
+<span class="sd">    it wraps it and adds the :meth:`.save` method.</span>
+<span class="sd">    </span>
+<span class="sd">    If you don&#39;t provide a session it creates a new one but you must provide the :data:`.secret`. </span>
+<span class="sd">    </span>
+<span class="sd">    For more about |webapp2| sessions see:</span>
+<span class="sd">    `http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cookie_name</span><span class="o">=</span><span class="s">&#39;webapp2authomatic&#39;</span><span class="p">,</span>
                  <span class="n">backend</span><span class="o">=</span><span class="s">&#39;memcache&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        A simple wrapper for |webapp2|_ sessions. If you provide a session</span>
-<span class="sd">        it wrapps it and adds the :meth:`.save` method.</span>
-<span class="sd">        </span>
-<span class="sd">        If you don&#39;t provide a session it creates a new one but you must provide the :data:`.secret`. </span>
-<span class="sd">        </span>
-<span class="sd">        For more about |webapp2| sessions see:</span>
-<span class="sd">        `http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html`_.</span>
 <span class="sd">        </span>
 <span class="sd">        .. warning::</span>
 <span class="sd">            </span>
@@ -285,7 +294,7 @@ for a succinct library.
 <span class="sd">            The session secret.</span>
 <span class="sd">        </span>
 <span class="sd">        :param str cookie_name:</span>
-<span class="sd">            The name of the session kookie.</span>
+<span class="sd">            The name of the session cookie.</span>
 <span class="sd">        </span>
 <span class="sd">        :param backend:</span>
 <span class="sd">            The session backend. One of ``&#39;memcache&#39;`` or ``&#39;datastore&#39;``.</span>
@@ -333,47 +342,50 @@ for a succinct library.
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    |gae| `NDB &lt;https://developers.google.com/appengine/docs/python/ndb/&gt;`_</span>
 <span class="sd">    based :doc:`config`.</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        </span>
+<span class="sd">        By :class:`.OpenID` provider uses :class:`.NDBOpenIDStore` as default :attr:`.OpenID.store`.</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-        
+    
+    <span class="c"># General properties</span>
     <span class="n">provider_name</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">(</span> <span class="p">)</span>
     <span class="n">class_</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
     
-    <span class="c"># AuthorisationProvider</span>
-    <span class="n">short_name</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">IntegerProperty</span><span class="p">()</span>
+    <span class="c"># AuthorizationProvider properties</span>
+    <span class="n">provider_id</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">IntegerProperty</span><span class="p">()</span>
     <span class="n">consumer_key</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
     <span class="n">consumer_secret</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
     
-    <span class="c"># OAuth2</span>
+    <span class="c"># OAuth2 properties</span>
     <span class="n">scope</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
+    <span class="n">offline</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">BooleanProperty</span><span class="p">()</span>
     
-    <span class="c"># AuthenticationProvider</span>
+    <span class="c"># AuthenticationProvider properties</span>
     <span class="n">identifier_param</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
     
-    <span class="c"># OpenID</span>
-    <span class="n">use_realm</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">BooleanProperty</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">realm_body</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">realm_param</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">xrds_param</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">sreg</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">sreg_required</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">ax_required</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
-    <span class="n">pape</span> <span class="o">=</span> <span class="n">ndb</span><span class="o">.</span><span class="n">StringProperty</span><span class="p">()</span>
     
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Resembles the dict.get(key[, default=None]) method</span>
+<span class="sd">        Resembles the :meth:`dict.get` method.</span>
 <span class="sd">        </span>
-<span class="sd">        Returns a provider config dictionary</span>
+<span class="sd">        :returns:</span>
+<span class="sd">            A configuration dictionary for specified provider.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
+        <span class="c"># Query datastore.</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">provider_name</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
         
         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
             <span class="n">result_dict</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
             
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;scope&#39;</span><span class="p">,</span> <span class="s">&#39;sreg&#39;</span><span class="p">,</span> <span class="s">&#39;sreg_required&#39;</span><span class="p">,</span> <span class="s">&#39;ax&#39;</span><span class="p">,</span> <span class="s">&#39;ax_required&#39;</span><span class="p">,</span> <span class="s">&#39;pape&#39;</span><span class="p">,</span> <span class="p">):</span>
+            <span class="c"># Use NDBOpenIDStore by default</span>
+            <span class="n">result_dict</span><span class="p">[</span><span class="s">&#39;store&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NDBOpenIDStore</span>
+            
+            <span class="c"># Convert coma-separated values to list. Currently only scope is csv.</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;scope&#39;</span><span class="p">,</span> <span class="p">):</span>
                 <span class="n">prop</span> <span class="o">=</span> <span class="n">result_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">prop</span><span class="p">:</span>
                     <span class="n">result_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">prop</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)]</span>
@@ -387,6 +399,10 @@ for a succinct library.
     
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resembles the :meth:`dict.values` method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
         <span class="c"># get all items</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
         <span class="c"># return list of dictionaries</span>
@@ -396,7 +412,15 @@ for a succinct library.
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates an Example entity if the model is empty</span>
+<span class="sd">        Creates an **&quot;Example&quot;** entity of kind **&quot;NDBConfig&quot;** in the datastore</span>
+<span class="sd">        if the model is empty and raises and error to inform you that you should populate the model with data.</span>
+<span class="sd">        </span>
+<span class="sd">        .. note::</span>
+<span class="sd">        </span>
+<span class="sd">            The *Datastore Viewer* in the ``_ah/admin/`` won&#39;t let you add properties to a model</span>
+<span class="sd">            if there is not an entity with that property already.</span>
+<span class="sd">            Therefore it is a good idea to keep the **&quot;Example&quot;** entity (which has all</span>
+<span class="sd">            possible properties set) in the datastore.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">fetch</span><span class="p">()):</span>
@@ -406,38 +430,23 @@ for a succinct library.
             <span class="n">example</span><span class="o">.</span><span class="n">class_</span> <span class="o">=</span> <span class="s">&#39;Provider class e.g. &quot;authomatic.providers.oauth2.Facebook&quot;.&#39;</span>
             <span class="n">example</span><span class="o">.</span><span class="n">provider_name</span> <span class="o">=</span> <span class="s">&#39;Your custom provider name e.g. &quot;fb&quot;.&#39;</span>
             
-            <span class="c"># TODO: Implement all new arguments including openid store.</span>
-            
-            <span class="c"># AuthorisationProvider</span>
+            <span class="c"># AuthorizationProvider</span>
             <span class="n">example</span><span class="o">.</span><span class="n">consumer_key</span> <span class="o">=</span> <span class="s">&#39;Consumer key.&#39;</span>
             <span class="n">example</span><span class="o">.</span><span class="n">consumer_secret</span> <span class="o">=</span> <span class="s">&#39;Consumer secret&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">short_name</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">example</span><span class="o">.</span><span class="n">provider_id</span> <span class="o">=</span> <span class="mi">1</span>
             
             <span class="c"># OAuth2</span>
             <span class="n">example</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="s">&#39;coma, separated, list, of, scopes&#39;</span>
             
             <span class="c"># AuthenticationProvider</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">identifier_param</span> <span class="o">=</span> <span class="s">&#39;User identifier to authenticate e.g. &quot;me.yahoo.com&quot;.&#39;</span>
+            <span class="n">example</span><span class="o">.</span><span class="n">identifier_param</span> <span class="o">=</span> <span class="s">&#39;Querystring parameter for claimed id. default is &quot;id&quot;&#39;</span>
             
-            <span class="c"># OpenID</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">use_realm</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">realm_body</span> <span class="o">=</span> <span class="s">&#39;Contents of the HTML body tag of the realm.&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">realm_param</span> <span class="o">=</span> <span class="s">&#39;Name of the query parameter to be used to serve the realm (leave empty for default).&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">xrds_param</span> <span class="o">=</span> <span class="s">&#39; The name of the query parameter to be used to serve the XRDS document (leave empty for default).&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">sreg</span> <span class="o">=</span> <span class="s">&#39;list, of, strings, of, optional, SREG, fields, (leave empty for defaults)&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">sreg_required</span> <span class="o">=</span> <span class="s">&#39;list, of, strings, of, required, SREG, fields, (leave empty for defaults)&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="s">&#39;list, of, strings, of, optional, AX, schemas, (leave empty for defaults)&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">ax_required</span> <span class="o">=</span> <span class="s">&#39;list, of, strings, of, required, AX, schemas, (leave empty for defaults)&#39;</span>
-            <span class="n">example</span><span class="o">.</span><span class="n">pape</span> <span class="o">=</span> <span class="s">&#39;list, of, strings, of, optional, PAPE, policies, (leave empty for defaults)&#39;</span>
-            
+            <span class="c"># Save the example</span>
             <span class="n">example</span><span class="o">.</span><span class="n">put</span><span class="p">()</span>
             
-            <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;{}://{}/_ah/admin/datastore?kind={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;wsgi.url_scheme&#39;</span><span class="p">),</span>
-                                                               <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;HTTP_HOST&#39;</span><span class="p">),</span>
-                                                               <span class="n">cls</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
-            
-            <span class="k">raise</span> <span class="n">GAEError</span><span class="p">(</span><span class="s">&#39;A NDBConfig data model was created! &#39;</span> <span class="o">+</span> \
-                           <span class="s">&#39;Go to {} and populate it with data!&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="c"># Raise an information error.</span>
+            <span class="k">raise</span> <span class="n">GAEError</span><span class="p">(</span><span class="s">&#39;A NDBConfig data model was created! Go to Datastore Viewer &#39;</span> <span class="o">+</span> \
+                           <span class="s">&#39;in your dashboard and populate it with data!&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="ndb_config"><a class="viewcode-back" href="../../../reference/extras.html#authomatic.extras.gae.ndb_config">[docs]</a><span class="k">def</span> <span class="nf">ndb_config</span><span class="p">():</span>
@@ -449,10 +458,10 @@ for a succinct library.
 <span class="sd">        </span>
 <span class="sd">    .. note::</span>
 <span class="sd">    </span>
-<span class="sd">        The *Datastore Viewer* in the ``_ah/admin/`` wont let you add properties to a model</span>
-<span class="sd">        if there is not an entity with that property allready.</span>
+<span class="sd">        The *Datastore Viewer* of the |gae|_ admin won&#39;t let you add properties to a model</span>
+<span class="sd">        if there is not an entity with that property already.</span>
 <span class="sd">        Therefore it is a good idea to keep the **&quot;Example&quot;** entity (which has all</span>
-<span class="sd">        possible properties set) in the datastore.</span>
+<span class="sd">        properties set) in the datastore.</span>
 <span class="sd">    </span>
 <span class="sd">    :raises:</span>
 <span class="sd">        :exc:`.GAEError`</span>
@@ -498,9 +507,10 @@ for a succinct library.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>

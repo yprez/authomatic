@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../../_static/underscore.js"></script>
     	<script type="text/javascript" src="../../_static/doctools.js"></script>
     	<script type="text/javascript" src="../../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -126,9 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
+<li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>
@@ -173,7 +173,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -238,198 +238,278 @@ for a succinct library.
   <h1>Source code for authomatic.adapters</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Framework Adapters</span>
-<span class="sd">------------------</span>
+<span class="sd">Adapters</span>
+<span class="sd">--------</span>
+
+<span class="sd">.. contents::</span>
+<span class="sd">   :backlinks: none</span>
 
 <span class="sd">The :func:`authomatic.login` function needs access to functionality like</span>
-<span class="sd">getting the url of the handler where it is called, getting the request params, headers and cookies and</span>
-<span class="sd">writing the body, headers and status to the response.</span>
+<span class="sd">getting the **URL** of the handler where it is being called, getting the **request params** and **cookies** and</span>
+<span class="sd">**writing the body**, **headers** and **status** to the response.</span>
 
 <span class="sd">Since implementation of these features varies across Python web frameworks,</span>
 <span class="sd">the Authomatic library uses **adapters** to unify these differences into a single interface.</span>
 
+<span class="sd">Available Adapters</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^</span>
+
+<span class="sd">If you are missing an adapter for the framework of your choice,</span>
+<span class="sd">please open an `enhancement issue &lt;https://github.com/peterhudec/authomatic/issues&gt;`_</span>
+<span class="sd">or consider a contribution to this module by :ref:`implementing &lt;implement_adapters&gt;` one by yourself.</span>
+<span class="sd">Its very easy and shouldn&#39;t take you more than a few minutes.</span>
+
+<span class="sd">.. autoclass:: DjangoAdapter</span>
+<span class="sd">    :members:</span>
+
+<span class="sd">.. autoclass:: Webapp2Adapter</span>
+<span class="sd">    :members:</span>
+
+<span class="sd">.. autoclass:: WebObAdapter</span>
+<span class="sd">    :members:</span>
+
+<span class="sd">.. autoclass:: WerkzeugAdapter</span>
+<span class="sd">    :members:</span>
+
+<span class="sd">.. _implement_adapters:</span>
+
+<span class="sd">Implementing an Adapter</span>
+<span class="sd">^^^^^^^^^^^^^^^^^^^^^^^</span>
+
 <span class="sd">Implementing an adapter for a Python web framework is pretty easy.</span>
 
-<span class="sd">You do it by subclassing the :class:`.BaseAdapter` abstract class.</span>
-<span class="sd">There are only **seven** members that you need to implement.</span>
+<span class="sd">Do it by subclassing the :class:`.BaseAdapter` abstract class.</span>
+<span class="sd">There are only **six** members that you need to implement.</span>
 
-<span class="sd">Moreover if your framework is based on the |webob|_ library</span>
-<span class="sd">you can subclass the :class:`.WebObBaseAdapter` and you only need to</span>
-<span class="sd">override the constructor.</span>
+<span class="sd">Moreover if your framework is based on the |webob|_ or |werkzeug|_ package</span>
+<span class="sd">you can subclass the :class:`.WebObAdapter` or :class:`.WerkzeugAdapter` respectively.</span>
 
 <span class="sd">.. autoclass:: BaseAdapter</span>
-<span class="sd">    :members:</span>
-<span class="sd">    </span>
-<span class="sd">.. autoclass:: WebObBaseAdapter</span>
-<span class="sd">    :members:</span>
-<span class="sd">    </span>
-<span class="sd">.. autoclass:: Webapp2Adapter</span>
 <span class="sd">    :members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">abc</span>
+<span class="kn">from</span> <span class="nn">authomatic.core</span> <span class="kn">import</span> <span class="n">Response</span>
 
 
 <div class="viewcode-block" id="BaseAdapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter">[docs]</a><span class="k">class</span> <span class="nc">BaseAdapter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for platform adapters</span>
-<span class="sd">    </span>
+
 <span class="sd">    Defines common interface for WSGI framework specific functionality.</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
-    
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span>
-    
-    
-    <span class="nd">@abc.abstractmethod</span>
-<div class="viewcode-block" id="BaseAdapter.write"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Must write specified value to response.</span>
-<span class="sd">        </span>
-<span class="sd">        :param str value:</span>
-<span class="sd">            String to be written to response.</span>
-<span class="sd">        </span>
-<span class="sd">        :returns:</span>
-<span class="sd">            :class:`dict`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
+
+
     <span class="nd">@abc.abstractproperty</span>
 <div class="viewcode-block" id="BaseAdapter.params"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.params">[docs]</a>    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Must return a dictionary of all request parameters of any HTTP method.</span>
-<span class="sd">        </span>
+<span class="sd">        Must return a :class:`dict` of all request parameters of any HTTP method.</span>
+
 <span class="sd">        :returns:</span>
 <span class="sd">            :class:`dict`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
+
+</div>
     <span class="nd">@abc.abstractproperty</span>
 <div class="viewcode-block" id="BaseAdapter.url"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.url">[docs]</a>    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Must return the url of the actual request including path but without query and fragment</span>
-<span class="sd">        </span>
+
 <span class="sd">        :returns:</span>
 <span class="sd">            :class:`str`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
+
+</div>
+    <span class="nd">@abc.abstractproperty</span>
+<div class="viewcode-block" id="BaseAdapter.cookies"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.cookies">[docs]</a>    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Must return cookies as a :class:`dict`.</span>
+
+<span class="sd">        :returns:</span>
+<span class="sd">            :class:`dict`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+</div>
+    <span class="nd">@abc.abstractmethod</span>
+<div class="viewcode-block" id="BaseAdapter.write"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Must write specified value to response.</span>
+
+<span class="sd">        :param str value:</span>
+<span class="sd">            String to be written to response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+</div>
     <span class="nd">@abc.abstractmethod</span>
 <div class="viewcode-block" id="BaseAdapter.set_header"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.set_header">[docs]</a>    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Must set response headers to ``Key: value``.</span>
-<span class="sd">        </span>
+
 <span class="sd">        :param str key:</span>
 <span class="sd">            Header name.</span>
-<span class="sd">            </span>
+
 <span class="sd">        :param str value:</span>
 <span class="sd">            Header value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
-    <span class="nd">@abc.abstractproperty</span>
-<div class="viewcode-block" id="BaseAdapter.headers"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.headers">[docs]</a>    <span class="k">def</span> <span class="nf">headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        We need it to retrieve the session cookie.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
-    <span class="nd">@abc.abstractproperty</span>
-<div class="viewcode-block" id="BaseAdapter.cookies"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.cookies">[docs]</a>    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        We need it to retrieve the session cookie.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
+
+</div>
     <span class="nd">@abc.abstractmethod</span>
-<div class="viewcode-block" id="BaseAdapter.set_status"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.set_status">[docs]</a>    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseAdapter.set_status"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.BaseAdapter.set_status">[docs]</a>    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        To set the staus in JSON endpoint.</span>
+<span class="sd">        Must set the response status e.g. ``&#39;302 Found&#39;``.</span>
+
+<span class="sd">        :param str status:</span>
+<span class="sd">            The HTTP response status.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
 </div></div>
-<div class="viewcode-block" id="WebObBaseAdapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.WebObBaseAdapter">[docs]</a><span class="k">class</span> <span class="nc">WebObBaseAdapter</span><span class="p">(</span><span class="n">BaseAdapter</span><span class="p">):</span>
+<div class="viewcode-block" id="DjangoAdapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.DjangoAdapter">[docs]</a><span class="k">class</span> <span class="nc">DjangoAdapter</span><span class="p">(</span><span class="n">BaseAdapter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract base class for adapters for |webob|_ based frameworks.</span>
-<span class="sd">    </span>
-<span class="sd">    If you use this base class you only need to implement these three :class:`.BaseAdapter` members:</span>
-<span class="sd">    </span>
-<span class="sd">    * :meth:`.BaseAdapter.fetch_async`</span>
-<span class="sd">    * :meth:`.BaseAdapter.response_parser`</span>
-<span class="sd">    * :attr:`.BaseAdapter.openid_store`</span>
-<span class="sd">    </span>
+<span class="sd">    Adapter for the |django|_ framework.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="nd">@abc.abstractproperty</span>
-<div class="viewcode-block" id="WebObBaseAdapter.request"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.WebObBaseAdapter.request">[docs]</a>    <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Must be a |webob|_ :class:`Request`.</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;                </span>
+<span class="sd">        :param request:</span>
+<span class="sd">            An instance of the :class:`django.http.HttpRequest` class.</span>
+<span class="sd">            </span>
+<span class="sd">        :param response:</span>
+<span class="sd">            An instance of the :class:`django.http.HttpResponse` class.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-    
-    </div>
-    <span class="nd">@abc.abstractproperty</span>
-<div class="viewcode-block" id="WebObBaseAdapter.response"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.WebObBaseAdapter.response">[docs]</a>    <span class="k">def</span> <span class="nf">response</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       Must be a |webob|_ :class:`Response`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-    
-    
-    <span class="c">#===========================================================================</span>
-    <span class="c"># Request</span>
-    <span class="c">#===========================================================================</span>
-    </div>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path_url</span>
-    
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">)</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_absolute_uri</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">COOKIES</span><span class="p">)</span>
     
-    
-    <span class="c">#===========================================================================</span>
-    <span class="c"># Response</span>
-    <span class="c">#===========================================================================</span>
-            
     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        
+    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">status</span>
+
+</div>
+<div class="viewcode-block" id="WebObAdapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.WebObAdapter">[docs]</a><span class="k">class</span> <span class="nc">WebObAdapter</span><span class="p">(</span><span class="n">BaseAdapter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Adapter for the |webob|_ package.&quot;&quot;&quot;</span>
     
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param request:</span>
+<span class="sd">            A |webob|_ :class:`Request` instance.</span>
+<span class="sd">            </span>
+<span class="sd">        :param response:</span>
+<span class="sd">            A |webob|_ :class:`Response` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
+        
+
+    <span class="c">#===========================================================================</span>
+    <span class="c"># Request</span>
+    <span class="c">#===========================================================================</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">path_url</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="p">)</span>
+
+
+    <span class="c">#===========================================================================</span>
+    <span class="c"># Response</span>
+    <span class="c">#===========================================================================</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
     <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    
-    
+
+
     <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span>
-    
+
 </div>
-<div class="viewcode-block" id="Webapp2Adapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.Webapp2Adapter">[docs]</a><span class="k">class</span> <span class="nc">Webapp2Adapter</span><span class="p">(</span><span class="n">WebObBaseAdapter</span><span class="p">):</span>
+<div class="viewcode-block" id="Webapp2Adapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.Webapp2Adapter">[docs]</a><span class="k">class</span> <span class="nc">Webapp2Adapter</span><span class="p">(</span><span class="n">WebObAdapter</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Adapter for the |webapp2|_ framework.</span>
+<span class="sd">    </span>
+<span class="sd">    Inherits from the :class:`.WebObAdapter`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">request</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
-    
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param handler:</span>
-<span class="sd">        </span>
-<span class="sd">            A |webapp2|_ :class:`RequestHandler` instance.</span>
+<span class="sd">            A :class:`webapp2.RequestHandler` instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
         <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">request</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">response</span>
-</pre></div></div>
+
+</div>
+<div class="viewcode-block" id="WerkzeugAdapter"><a class="viewcode-back" href="../../reference/adapters.html#authomatic.adapters.WerkzeugAdapter">[docs]</a><span class="k">class</span> <span class="nc">WerkzeugAdapter</span><span class="p">(</span><span class="n">BaseAdapter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adapter for |flask|_ and other |werkzeug|_ based frameworks.</span>
+<span class="sd">    </span>
+<span class="sd">    Thanks to `Mark Steve Samson &lt;http://marksteve.com&gt;`_.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">args</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">base_url</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">cookies</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param request:</span>
+<span class="sd">            Instance of the :class:`werkzeug.wrappers.Request` class.</span>
+<span class="sd">            </span>
+<span class="sd">        :param response:</span>
+<span class="sd">            Instance of the :class:`werkzeug.wrappers.Response` class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">data</span> <span class="o">+=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">status</span></div>
+</pre></div>
 
 			</div>
 			
@@ -464,9 +544,10 @@ for a succinct library.
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
 </ul>
 </li>
 </ul>

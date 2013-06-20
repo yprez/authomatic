@@ -28,13 +28,13 @@
 	<meta property="og:image" content="http://peterhudec.github.io/authomatic/_static/img/authomatic-seo.gif" />
 	
 	
-	<meta property="og:description" content="Simple yet powerful authorization / authentication client library for Python WEB applications." />
+	<meta property="og:description" content="There are 10 OAuth 1.0a providers and 16 OAuth 2.0 providers available out of the box. You can also use the OpenID and GAEOpenID providers." />
 	<meta property="og:site_name" content="Authomatic" />
 	
 	
     
     
-	<meta name="description" content="Simple yet powerful authorization / authentication client library for Python WEB applications.">
+	<meta name="description" content="There are 10 OAuth 1.0a providers and 16 OAuth 2.0 providers available out of the box. You can also use the OpenID and GAEOpenID providers.">
     
 	
 	
@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.0',
+        VERSION:     '0.0.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -57,7 +57,7 @@
     	<script type="text/javascript" src="../_static/underscore.js"></script>
     	<script type="text/javascript" src="../_static/doctools.js"></script>
     	<script type="text/javascript" src="../_static/foundation/js/vendor/custom.modernizr.js"></script>
-    
+ 
 <script type="text/javascript">
 /* <![CDATA[ */
 (function() {
@@ -78,7 +78,6 @@
 
 
 <body>
-	
 	<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -117,6 +116,7 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l2"><a class="reference internal" href="extras.html">Extras</a><ul class="dropdown ">
+<li class="toctree-l3"><a class="reference internal" href="extras.html#flask-extras">Flask Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="extras.html#gae-extras">Google App Engine Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="extras.html#interfaces">Interfaces</a></li>
 </ul>
@@ -125,8 +125,10 @@
 </ul>
 </li>
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
-<li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
 </li>
 </ul>
@@ -177,7 +179,7 @@ is an <em>authorization</em> / <em>authentication</em><br />
 client library for Python web applications<br />
 inspired by Alex Vagin’s
 <a href="http://code.google.com/p/gae-simpleauth/" target="_blank">Simpleauth</a>.<br /> 
-In fact, I almost named it <em>Deathsimpleauth</em>,<br /> 
+In fact, I almost named it <em>Deadsimpleauth</em>,<br /> 
 but that name would be too long<br />
 for a succinct library.
 					</p>
@@ -638,7 +640,7 @@ Use it in the <a class="reference internal" href="config.html"><em>Config</em></
 
 <dl class="classmethod">
 <dt id="authomatic.providers.oauth2.OAuth2.create_request_elements">
-<em class="property">classmethod </em><tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>method='GET'</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em>, <em>secret=None</em>, <em>redirect_uri=''</em>, <em>scope=''</em>, <em>csrf=''</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.OAuth2.create_request_elements" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>method='GET'</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em>, <em>secret=None</em>, <em>redirect_uri=''</em>, <em>scope=''</em>, <em>csrf=''</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#OAuth2.create_request_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.OAuth2.create_request_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates OAuth 2.0 request elements.</p>
 </dd></dl>
 
@@ -662,7 +664,7 @@ Use it in the <a class="reference internal" href="config.html"><em>Config</em></
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Behance">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Behance</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Behance" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Behance</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Behance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Behance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Behance OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="http://www.behance.net/dev/apps">http://www.behance.net/dev/apps</a></li>
@@ -690,7 +692,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Bitly">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Bitly</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Bitly" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Bitly</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Bitly"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Bitly" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bitly OAuth 2.0 provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -705,7 +707,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Cosm">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Cosm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Cosm" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Cosm</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Cosm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Cosm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cosm OAuth 2.0 provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -737,7 +739,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.DeviantART">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">DeviantART</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.DeviantART" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">DeviantART</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#DeviantART"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.DeviantART" title="Permalink to this definition">¶</a></dt>
 <dd><p>DeviantART OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://www.deviantart.com/settings/myapps">https://www.deviantart.com/settings/myapps</a></li>
@@ -760,7 +762,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Foursquare">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Foursquare</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Foursquare" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Foursquare</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Foursquare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Foursquare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Foursquare OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://foursquare.com/developers/apps">https://foursquare.com/developers/apps</a></li>
@@ -788,7 +790,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.GitHub">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">GitHub</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.GitHub" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">GitHub</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#GitHub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.GitHub" title="Permalink to this definition">¶</a></dt>
 <dd><p>GitHub OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://github.com/settings/applications/">https://github.com/settings/applications/</a></li>
@@ -828,7 +830,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.LinkedIn">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">LinkedIn</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.LinkedIn" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">LinkedIn</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#LinkedIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.LinkedIn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Linked In OAuth 2.0 provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -860,7 +862,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.PayPal">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">PayPal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.PayPal" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">PayPal</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#PayPal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.PayPal" title="Permalink to this definition">¶</a></dt>
 <dd><p>PayPal OAuth 2.0 provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -893,7 +895,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Reddit">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Reddit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Reddit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Reddit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Reddit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Reddit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reddit OAuth 2.0 provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -908,7 +910,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Viadeo">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Viadeo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Viadeo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Viadeo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Viadeo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Viadeo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Viadeo OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="http://dev.viadeo.com/dashboard/">http://dev.viadeo.com/dashboard/</a></li>
@@ -942,7 +944,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.VK">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">VK</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.VK" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">VK</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#VK"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.VK" title="Permalink to this definition">¶</a></dt>
 <dd><p>VK.com OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: Could not find any. You must do it like this: <a class="reference external" href="http://vk.com/editapp">http://vk.com/editapp</a>?id={consumer_key}</li>
@@ -980,7 +982,7 @@ Use it like this:</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Yammer">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Yammer</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Yammer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Yammer</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Yammer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Yammer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yammer OAuth 2.0 provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1012,7 +1014,7 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 
 <dl class="class">
 <dt id="authomatic.providers.oauth2.Yandex">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Yandex</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth2.Yandex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth2.</tt><tt class="descname">Yandex</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#Yandex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.Yandex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yandex OAuth 2.0 provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://oauth.yandex.com/client/my">https://oauth.yandex.com/client/my</a></li>
@@ -1113,7 +1115,7 @@ see <a class="reference external" href="http://oauth.net/core/1.0a/#auth_step1">
 
 <dl class="classmethod">
 <dt id="authomatic.providers.oauth1.OAuth1.create_request_elements">
-<em class="property">classmethod </em><tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em>, <em>method='GET'</em>, <em>verifier=''</em>, <em>callback=''</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.OAuth1.create_request_elements" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em>, <em>method='GET'</em>, <em>verifier=''</em>, <em>callback=''</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#OAuth1.create_request_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.OAuth1.create_request_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates OAuth 1.0a request elements.</p>
 </dd></dl>
 
@@ -1121,7 +1123,7 @@ see <a class="reference external" href="http://oauth.net/core/1.0a/#auth_step1">
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Bitbucket">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Bitbucket</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Bitbucket" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Bitbucket</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Bitbucket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Bitbucket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bitbucket OAuth 1.0a provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://bitbucket.org/account/user/peterhudec/api">https://bitbucket.org/account/user/peterhudec/api</a></li>
@@ -1149,7 +1151,7 @@ see <a class="reference external" href="http://oauth.net/core/1.0a/#auth_step1">
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Flickr">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Flickr</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Flickr" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Flickr</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Flickr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Flickr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flickr OAuth 1.0a provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://www.flickr.com/services/apps/">https://www.flickr.com/services/apps/</a></li>
@@ -1177,7 +1179,7 @@ see <a class="reference external" href="http://oauth.net/core/1.0a/#auth_step1">
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Meetup">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Meetup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Meetup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Meetup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Meetup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Meetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Meetup OAuth 1.0a provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1210,7 +1212,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Plurk">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Plurk</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Plurk" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Plurk</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Plurk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Plurk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plurk OAuth 1.0a provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="http://www.plurk.com/PlurkApp/">http://www.plurk.com/PlurkApp/</a></li>
@@ -1267,7 +1269,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Tumblr">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Tumblr</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Tumblr" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Tumblr</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Tumblr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Tumblr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tumblr OAuth 1.0a provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="http://www.tumblr.com/oauth/apps">http://www.tumblr.com/oauth/apps</a></li>
@@ -1295,7 +1297,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.UbuntuOne">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">UbuntuOne</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.UbuntuOne" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">UbuntuOne</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#UbuntuOne"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.UbuntuOne" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ubuntu One OAuth 1.0a provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1327,7 +1329,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Vimeo">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Vimeo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Vimeo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Vimeo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Vimeo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Vimeo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vimeo OAuth 1.0a provider.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1359,7 +1361,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Xero">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Xero</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Xero" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Xero</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Xero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Xero" title="Permalink to this definition">¶</a></dt>
 <dd><p>Xero OAuth 1.0a provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1391,7 +1393,7 @@ which they don&#8217;t provide in the OAuth 2.0 access token response.</p>
 
 <dl class="class">
 <dt id="authomatic.providers.oauth1.Yahoo">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Yahoo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.oauth1.Yahoo" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.oauth1.</tt><tt class="descname">Yahoo</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth1.html#Yahoo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth1.Yahoo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Yahoo OAuth 1.0a provider.</p>
 <ul class="simple">
 <li>Dashboard: <a class="reference external" href="https://developer.apps.yahoo.com/dashboard/">https://developer.apps.yahoo.com/dashboard/</a></li>
@@ -1727,7 +1729,7 @@ not empty when the method runs out of it&#8217;s flow or when there are errors.<
 
 <dl class="method">
 <dt id="authomatic.providers.BaseProvider.to_dict">
-<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#authomatic.providers.BaseProvider.to_dict" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#BaseProvider.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.BaseProvider.to_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the provider instance to a <a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1786,7 +1788,7 @@ not empty when the method runs out of it&#8217;s flow or when there are errors.<
 
 <dl class="class">
 <dt id="authomatic.providers.AuthorizationProvider">
-<em class="property">class </em><tt class="descclassname">authomatic.providers.</tt><tt class="descname">AuthorizationProvider</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">authomatic.providers.</tt><tt class="descname">AuthorizationProvider</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base provider for <em>authorization protocols</em> i.e. protocols which allow a <strong>provider</strong>
 to authorize a <strong>consumer</strong> to access <strong>protected resources</strong> of a <strong>user</strong>.
 e.g. <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a> or <a class="reference external" href="http://oauth.net/core/1.0a/">OAuth 1.0a</a>.</p>
@@ -1826,7 +1828,7 @@ e.g. <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a> or <
 
 <dl class="attribute">
 <dt id="authomatic.providers.AuthorizationProvider.user_authorization_url">
-<tt class="descname">user_authorization_url</tt><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.user_authorization_url" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">user_authorization_url</tt><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.user_authorization_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.user_authorization_url" title="Permalink to this definition">¶</a></dt>
 <dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> URL to which we redirect the <strong>user</strong> to grant our app i.e. the <strong>consumer</strong>
 an <strong>authorization</strong> to access his <strong>protected resources</strong>.
 see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.1.1">http://tools.ietf.org/html/rfc6749#section-4.1.1</a> and
@@ -1835,7 +1837,7 @@ see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#secti
 
 <dl class="attribute">
 <dt id="authomatic.providers.AuthorizationProvider.access_token_url">
-<tt class="descname">access_token_url</tt><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access_token_url" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">access_token_url</tt><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access_token_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access_token_url" title="Permalink to this definition">¶</a></dt>
 <dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> URL where we can get the <em>access token</em> to access <strong>protected resources</strong> of a <strong>user</strong>.
 see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.1.3">http://tools.ietf.org/html/rfc6749#section-4.1.3</a> and
 <a class="reference external" href="http://oauth.net/core/1.0a/#auth_step3">http://oauth.net/core/1.0a/#auth_step3</a>.</p>
@@ -1843,7 +1845,7 @@ see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#secti
 
 <dl class="attribute">
 <dt id="authomatic.providers.AuthorizationProvider.user_info_url">
-<tt class="descname">user_info_url</tt><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.user_info_url" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">user_info_url</tt><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.user_info_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.user_info_url" title="Permalink to this definition">¶</a></dt>
 <dd><p><tt class="xref py py-class docutils literal"><span class="pre">str</span></tt> URL where we can get the <strong>user</strong> info.
 see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-7">http://tools.ietf.org/html/rfc6749#section-7</a> and
 <a class="reference external" href="http://oauth.net/core/1.0a/#anchor12">http://oauth.net/core/1.0a/#anchor12</a>.</p>
@@ -1851,7 +1853,7 @@ see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#secti
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.to_tuple">
-<tt class="descname">to_tuple</tt><big>(</big><em>credentials</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.to_tuple" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">to_tuple</tt><big>(</big><em>credentials</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.to_tuple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.to_tuple" title="Permalink to this definition">¶</a></dt>
 <dd><p>Must convert <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.credentials" title="authomatic.providers.AuthorizationProvider.credentials"><tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt></a> to a <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt> to be used by <a class="reference internal" href="classes.html#authomatic.core.Credentials.serialize" title="authomatic.core.Credentials.serialize"><tt class="xref py py-meth docutils literal"><span class="pre">Credentials.serialize()</span></tt></a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1871,7 +1873,7 @@ see <a class="reference external" href="http://tools.ietf.org/html/rfc6749#secti
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.reconstruct">
-<tt class="descname">reconstruct</tt><big>(</big><em>deserialized_tuple</em>, <em>credentials</em>, <em>cfg</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.reconstruct" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">reconstruct</tt><big>(</big><em>deserialized_tuple</em>, <em>credentials</em>, <em>cfg</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.reconstruct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.reconstruct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Must convert the <tt class="xref py py-data docutils literal"><span class="pre">deserialized_tuple</span></tt> back to <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1895,7 +1897,7 @@ are all the items of the <tt class="xref py py-class docutils literal"><span cla
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.create_request_elements">
-<tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>method='GET'</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.create_request_elements" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_request_elements</tt><big>(</big><em>request_type</em>, <em>credentials</em>, <em>url</em>, <em>method='GET'</em>, <em>params=None</em>, <em>headers=None</em>, <em>body=''</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.create_request_elements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.create_request_elements" title="Permalink to this definition">¶</a></dt>
 <dd><p>Must return <tt class="xref py py-class docutils literal"><span class="pre">RequestElements</span></tt>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1926,7 +1928,7 @@ are all the items of the <tt class="xref py py-class docutils literal"><span cla
 
 <dl class="attribute">
 <dt id="authomatic.providers.AuthorizationProvider.type_id">
-<tt class="descname">type_id</tt><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.type_id" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">type_id</tt><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.type_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.type_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>A short string representing the provider implementation id used for
 serialization of <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> and to identify the type of provider in JavaScript.
 The part before hyphen denotes the type of the provider, the part after hyphen denotes the class id
@@ -1935,7 +1937,7 @@ e.g. <tt class="docutils literal"><span class="pre">oauth2.Facebook.type_id</spa
 
 <dl class="classmethod">
 <dt id="authomatic.providers.AuthorizationProvider.access_with_credentials">
-<em class="property">classmethod </em><tt class="descname">access_with_credentials</tt><big>(</big><em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers=None</em>, <em>body=''</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access_with_credentials" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">access_with_credentials</tt><big>(</big><em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers=None</em>, <em>body=''</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access_with_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access_with_credentials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the <strong>protected resource</strong> of the <strong>user</strong> to whom belong
 the supplied <tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1970,7 +1972,7 @@ the supplied <tt class="xref py py-data docutils literal"><span class="pre">cred
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.access">
-<tt class="descname">access</tt><big>(</big><em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers={}</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">access</tt><big>(</big><em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers={}</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetches the <strong>protected resource</strong> of the logged in <strong>user</strong>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1994,7 +1996,7 @@ the supplied <tt class="xref py py-data docutils literal"><span class="pre">cred
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.async_access">
-<tt class="descname">async_access</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.async_access" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">async_access</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.async_access"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.async_access" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.access" title="authomatic.providers.AuthorizationProvider.access"><tt class="xref py py-meth docutils literal"><span class="pre">access()</span></tt></a> but runs asynchronously in a separate thread.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -2012,7 +2014,7 @@ the supplied <tt class="xref py py-data docutils literal"><span class="pre">cred
 
 <dl class="method">
 <dt id="authomatic.providers.AuthorizationProvider.update_user">
-<tt class="descname">update_user</tt><big>(</big><big>)</big><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.update_user" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">update_user</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.update_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.update_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the <a class="reference internal" href="#authomatic.providers.BaseProvider.user" title="authomatic.providers.BaseProvider.user"><tt class="xref py py-attr docutils literal"><span class="pre">BaseProvider.user</span></tt></a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -2072,6 +2074,7 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="extras.html">Extras</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extras.html#flask-extras">Flask Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="extras.html#gae-extras">Google App Engine Extras</a></li>
 <li class="toctree-l3"><a class="reference internal" href="extras.html#interfaces">Interfaces</a></li>
 </ul>
@@ -2080,8 +2083,10 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Tutorials / Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Credentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/django-simple.html">Simple Django Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
 </li>
 </ul>
