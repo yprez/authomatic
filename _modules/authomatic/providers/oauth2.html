@@ -925,7 +925,7 @@ for a succinct library.
     
     <span class="n">user_authorization_url</span> <span class="o">=</span> <span class="s">&#39;https://accounts.google.com/o/oauth2/auth&#39;</span>
     <span class="n">access_token_url</span> <span class="o">=</span> <span class="s">&#39;https://accounts.google.com/o/oauth2/token&#39;</span>
-    <span class="n">user_info_url</span> <span class="o">=</span> <span class="s">&#39;https://www.googleapis.com/oauth2/v1/userinfo&#39;</span>
+    <span class="n">user_info_url</span> <span class="o">=</span> <span class="s">&#39;https://www.googleapis.com/oauth2/v3/userinfo&#39;</span>
     
     <span class="n">user_info_scope</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;https://www.googleapis.com/auth/userinfo.profile&#39;</span><span class="p">,</span>
                        <span class="s">&#39;https://www.googleapis.com/auth/userinfo.email&#39;</span><span class="p">]</span>
@@ -945,9 +945,15 @@ for a succinct library.
     
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_x_user_parser</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;sub&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;given_name&#39;</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;family_name&#39;</span><span class="p">)</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">link</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;profile&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">birth_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;birthdate&#39;</span><span class="p">),</span> <span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">birth_date</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;birthdate&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">user</span>
     
     
