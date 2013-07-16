@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.5',
+        VERSION:     '0.0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -127,6 +127,7 @@
 <li class="has-dropdown toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="dropdown current">
 <li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -151,7 +152,7 @@
 		
 
 	
-		<li><a href="simple.html"  title="Simple Webapp2 Google App Engine Example">next &raquo;</a></li>
+		<li><a href="pyramid-simple.html"  title="Simple Pyramid Example">next &raquo;</a></li>
 	
 					</ul>
 				</section>
@@ -490,6 +491,17 @@ parsed from the <a class="reference internal" href="../reference/classes.html#au
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python main.py
 </pre></div>
 </div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>Some of the providers don&#8217;t support authorization from apps running on <strong>localhost</strong>.
+Probably the best solution is to use an arbitrary domain as an alias of the <tt class="docutils literal"><span class="pre">127.0.0.1</span></tt> IP address.</p>
+<p>You can do this on UNIX systems by adding an alias to the <tt class="docutils literal"><span class="pre">/etc/hosts</span></tt> file.</p>
+<div class="last highlight-none"><div class="highlight"><pre>    # /etc/hosts
+    127.0.0.1    localhost
+<span class="hll">    127.0.0.1    yourlocalhostalias.com
+</span></pre></div>
+</div>
+</div>
 <p>Here is the complete <tt class="docutils literal"><span class="pre">login.html</span></tt> template.
 Remember that you can download all the files we just created from
 <a class="reference external" href="https://github.com/peterhudec/authomatic/tree/master/examples/flask/werkzeug_adapter">GitHub</a>.</p>
@@ -668,6 +680,7 @@ Remember that you can download all the files we just created from
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials / Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -682,7 +695,7 @@ Remember that you can download all the files we just created from
 	</div><div id="footer"><div id="bottom-nav"><span><a href="django-simple.html"  title="Simple Django Example">&laquo; previous</a></span>
 			<span><a href="../genindex.html"  title="General Index">index</a></span>
 				<span><a href="../py-modindex.html"  title="Python Module Index">modules</a></span>
-				<span><a href="simple.html"  title="Simple Webapp2 Google App Engine Example">next &raquo;</a></span></div><div id="footer-notice">
+				<span><a href="pyramid-simple.html"  title="Simple Pyramid Example">next &raquo;</a></span></div><div id="footer-notice">
 			    	&copy; Copyright 2012,
 			    	
 			    		<a href="http://peterhudec.com">Peter Hudec</a>

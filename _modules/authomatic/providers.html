@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.5',
+        VERSION:     '0.0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -127,6 +127,7 @@
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
 <li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -392,10 +393,6 @@ for a succinct library.
         <span class="bp">self</span><span class="o">.</span><span class="n">popup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;popup&#39;</span><span class="p">)</span>
     
     
-    <span class="c">###############################################</span>
-    <span class="c"># From Middleware</span>
-    <span class="c">###############################################</span>
-    
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adapter</span><span class="o">.</span><span class="n">url</span>
@@ -571,8 +568,7 @@ for a succinct library.
         <span class="n">authomatic</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="s">&#39;: &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;authomatic&#39;</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">msg</span><span class="p">)))</span>
         
     
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">max_redirects</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">content_parser</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">max_redirects</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">content_parser</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fetches a URL.</span>
 <span class="sd">        </span>
@@ -599,10 +595,12 @@ for a succinct library.
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_params</span><span class="p">)</span>
+        
         <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">access_headers</span><span class="p">)</span>
         
         <span class="n">scheme</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">fragment</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        
         <span class="n">query</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         
         <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;POST&#39;</span><span class="p">,</span> <span class="s">&#39;PUT&#39;</span><span class="p">,</span> <span class="s">&#39;PATCH&#39;</span><span class="p">):</span>
@@ -614,12 +612,12 @@ for a succinct library.
         
         <span class="n">request_path</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urlunsplit</span><span class="p">((</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
         
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> host: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">))</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> path: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request_path</span><span class="p">))</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> method: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> body: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> params: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u2514\u2500</span><span class="s"> headers: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">headers</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> host: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> path: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request_path</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> method: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> body: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> params: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u2514\u2500</span><span class="s"> headers: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">headers</span><span class="p">))</span>
         
         <span class="c"># Connect</span>
         <span class="k">if</span> <span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;https&#39;</span><span class="p">:</span>
@@ -646,11 +644,11 @@ for a succinct library.
             <span class="k">elif</span> <span class="n">max_redirects</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">remaining_redirects</span> <span class="o">=</span> <span class="n">max_redirects</span> <span class="o">-</span> <span class="mi">1</span>
                 
-                <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">&#39;Redirecting to {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-                <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">&#39;Remaining redirects: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remaining_redirects</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">&#39;Redirecting to {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">&#39;Remaining redirects: &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remaining_redirects</span><span class="p">))</span>
                 
                 <span class="c"># Call this method again.</span>
-                <span class="n">response</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_fetch</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
                                       <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                                       <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
                                       <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
@@ -661,10 +659,10 @@ for a succinct library.
                                  <span class="n">url</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
                                  <span class="n">status</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39;Got response:&#39;</span><span class="p">)</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> url: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> status: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">))</span>
-            <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u2514\u2500</span><span class="s"> headers: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">getheaders</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39;Got response:&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> url: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u251C\u2500</span><span class="s"> status: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span> <span class="s">u&#39; </span><span class="se">\u2514\u2500</span><span class="s"> headers: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">getheaders</span><span class="p">()))</span>
                 
         <span class="k">return</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">content_parser</span><span class="p">)</span>
     
@@ -769,6 +767,16 @@ for a succinct library.
 <span class="sd">            </span>
 <span class="sd">        :arg dict access_token_params:</span>
 <span class="sd">            A dictionary of additional request parameters for **access_with_credentials token request**.</span>
+<span class="sd">            </span>
+<span class="sd">        :arg dict access_headers:</span>
+<span class="sd">            A dictionary of default HTTP headers that will be used when</span>
+<span class="sd">            accessing **user&#39;s** protected resources.</span>
+<span class="sd">            Applied by :meth:`.access()`, :meth:`.update_user()` and :meth:`.User.update()`</span>
+<span class="sd">            </span>
+<span class="sd">        :arg dict access_params:</span>
+<span class="sd">            A dictionary of default query string parameters that will be used when</span>
+<span class="sd">            accessing **user&#39;s** protected resources.</span>
+<span class="sd">            Applied by :meth:`.access()`, :meth:`.update_user()` and :meth:`.User.update()`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="nb">super</span><span class="p">(</span><span class="n">AuthorizationProvider</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -777,11 +785,14 @@ for a succinct library.
         <span class="bp">self</span><span class="o">.</span><span class="n">consumer_secret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;consumer_secret&#39;</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">user_authorization_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;user_authorization_params&#39;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">access_token_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;user_authorization_headers&#39;</span><span class="p">,</span> <span class="p">{})</span>
         
+        <span class="bp">self</span><span class="o">.</span><span class="n">access_token_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;user_authorization_headers&#39;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">access_token_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;access_token_params&#39;</span><span class="p">,</span> <span class="p">{})</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">access_headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;access_headers&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">access_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kwarg</span><span class="p">(</span><span class="n">kwargs</span><span class="p">,</span> <span class="s">&#39;access_params&#39;</span><span class="p">,</span> <span class="p">{})</span>
         
         <span class="c">#: :class:`.Credentials` to access **user&#39;s protected resources**.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">credentials</span> <span class="o">=</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">Credentials</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
@@ -915,8 +926,7 @@ for a succinct library.
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PROVIDER_TYPE_ID</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">PROVIDER_ID_MAP</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">cls</span><span class="p">))</span>
     
     </div>
-    <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="AuthorizationProvider.access_with_credentials"><a class="viewcode-back" href="../../reference/providers.html#authomatic.providers.AuthorizationProvider.access_with_credentials">[docs]</a>    <span class="k">def</span> <span class="nf">access_with_credentials</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="AuthorizationProvider.access_with_credentials"><a class="viewcode-back" href="../../reference/providers.html#authomatic.providers.AuthorizationProvider.access_with_credentials">[docs]</a>    <span class="k">def</span> <span class="nf">access_with_credentials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;GET&#39;</span><span class="p">,</span>
                                 <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">max_redirects</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">content_parser</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fetches the **protected resource** of the **user** to whom belong</span>
@@ -949,9 +959,9 @@ for a succinct library.
         
         <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
         
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Accessing protected resource {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Accessing protected resource {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
         
-        <span class="n">request_elements</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">create_request_elements</span><span class="p">(</span><span class="n">request_type</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">PROTECTED_RESOURCE_REQUEST_TYPE</span><span class="p">,</span>
+        <span class="n">request_elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_request_elements</span><span class="p">(</span><span class="n">request_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PROTECTED_RESOURCE_REQUEST_TYPE</span><span class="p">,</span>
                                                         <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">,</span>
                                                         <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
                                                         <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
@@ -959,11 +969,11 @@ for a succinct library.
                                                         <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
                                                         <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
         
-        <span class="n">response</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_fetch</span><span class="p">(</span><span class="o">*</span><span class="n">request_elements</span><span class="p">,</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch</span><span class="p">(</span><span class="o">*</span><span class="n">request_elements</span><span class="p">,</span>
                               <span class="n">max_redirects</span><span class="o">=</span><span class="n">max_redirects</span><span class="p">,</span>
                               <span class="n">content_parser</span><span class="o">=</span><span class="n">content_parser</span><span class="p">)</span>
         
-        <span class="n">cls</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Got response. HTTP status = {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s">&#39;Got response. HTTP status = {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">response</span>
     
     </div>
@@ -1195,6 +1205,7 @@ for a succinct library.
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>

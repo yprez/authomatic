@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.5',
+        VERSION:     '0.0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -127,6 +127,7 @@
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -527,7 +528,8 @@ for a succinct library.
                 <span class="c"># Request Token URL</span>
                 <span class="k">if</span> <span class="n">consumer_key</span> <span class="ow">and</span> <span class="n">consumer_secret</span> <span class="ow">and</span> <span class="n">callback</span><span class="p">:</span>
                     <span class="n">params</span><span class="p">[</span><span class="s">&#39;oauth_consumer_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">consumer_key</span>
-                    <span class="n">params</span><span class="p">[</span><span class="s">&#39;oauth_callback&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">callback</span>
+<span class="c">#                     params[&#39;oauth_callback&#39;] = callback</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s">&#39;oauth_callback&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;oob&#39;</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">OAuth1Error</span><span class="p">(</span><span class="s">&#39;Credentials with valid consumer_key, consumer_secret and &#39;</span> <span class="o">+</span>\
                                                              <span class="s">&#39;callback are required to create Request Token URL!&#39;</span><span class="p">)</span>
@@ -993,7 +995,7 @@ for a succinct library.
     <span class="n">request_token_url</span> <span class="o">=</span> <span class="s">&#39;https://api.login.yahoo.com/oauth/v2/get_request_token&#39;</span>
     <span class="n">user_authorization_url</span> <span class="o">=</span> <span class="s">&#39;https://api.login.yahoo.com/oauth/v2/request_auth&#39;</span>
     <span class="n">access_token_url</span> <span class="o">=</span> <span class="s">&#39;https://api.login.yahoo.com/oauth/v2/get_token&#39;</span>
-    <span class="n">user_info_url</span> <span class="o">=</span> <span class="s">&#39;http://query.yahooapis.com/v1/yql?q=select%20*</span><span class="si">%20f</span><span class="s">rom</span><span class="si">%20s</span><span class="s">ocial.profile%20where</span><span class="si">%20g</span><span class="s">uid%3Dme&amp;format=json&#39;</span>
+    <span class="n">user_info_url</span> <span class="o">=</span> <span class="s">&#39;http://query.yahooapis.com/v1/yql?q=select%20*</span><span class="si">%20f</span><span class="s">rom</span><span class="si">%20s</span><span class="s">ocial.profile%20where</span><span class="si">%20g</span><span class="s">uid%3Dme%3B&amp;format=json&#39;</span>
     
     <span class="n">same_origin</span> <span class="o">=</span> <span class="bp">False</span>
     <span class="n">supports_jsonp</span> <span class="o">=</span> <span class="bp">True</span>
@@ -1007,6 +1009,14 @@ for a succinct library.
         <span class="n">user</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;gender&#39;</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">nickname</span> <span class="o">=</span> <span class="n">_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;nickname&#39;</span><span class="p">)</span>
         <span class="n">user</span><span class="o">.</span><span class="n">link</span> <span class="o">=</span> <span class="n">_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;profileUrl&#39;</span><span class="p">)</span>
+        
+        <span class="n">emails</span> <span class="o">=</span> <span class="n">_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;emails&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">emails</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">emails</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s">&#39;primary&#39;</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;handle&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">emails</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">emails</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;handle&#39;</span><span class="p">)</span>
         
         <span class="n">user</span><span class="o">.</span><span class="n">picture</span> <span class="o">=</span> <span class="n">_user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;image&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;imageUrl&#39;</span><span class="p">)</span>
         
@@ -1067,6 +1077,7 @@ for a succinct library.
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Tutorials / Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>

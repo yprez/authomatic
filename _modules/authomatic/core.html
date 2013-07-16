@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.5',
+        VERSION:     '0.0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -127,6 +127,7 @@
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
 <li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -1602,14 +1603,18 @@ for a succinct library.
         <span class="n">ProviderClass</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">provider_class</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;ACCESS HEADERS: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">headers</span><span class="p">))</span>
         <span class="c"># Access resource and return response.</span>
-        <span class="k">return</span> <span class="n">ProviderClass</span><span class="o">.</span><span class="n">access_with_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">,</span>
-                                                     <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-                                                     <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-                                                     <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
-                                                     <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-                                                     <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
-                                                     <span class="n">max_redirects</span><span class="o">=</span><span class="n">max_redirects</span><span class="p">,</span>
-                                                     <span class="n">content_parser</span><span class="o">=</span><span class="n">content_parser</span><span class="p">)</span>
+        
+        <span class="n">provider_settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">provider_name</span><span class="p">)</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">ProviderClass</span><span class="p">(</span><span class="n">provider_settings</span><span class="p">)</span>
+        <span class="n">provider</span><span class="o">.</span><span class="n">credentials</span> <span class="o">=</span> <span class="n">credentials</span>
+        
+        <span class="k">return</span> <span class="n">provider</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                               <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                               <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+                               <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+                               <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+                               <span class="n">max_redirects</span><span class="o">=</span><span class="n">max_redirects</span><span class="p">,</span>
+                               <span class="n">content_parser</span><span class="o">=</span><span class="n">content_parser</span><span class="p">)</span>
     
     
     <span class="k">def</span> <span class="nf">async_access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -2031,6 +2036,7 @@ for a succinct library.
 <li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Tutorials / Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>

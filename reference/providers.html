@@ -47,7 +47,7 @@
 	<script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.0.5',
+        VERSION:     '0.0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -127,6 +127,7 @@
 <li class="has-dropdown toctree-l1"><a class="reference internal" href="../examples/index.html">Tutorials / Examples</a><ul class="dropdown ">
 <li class="toctree-l2"><a class="reference internal" href="../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
@@ -644,9 +645,9 @@ Use it in the <a class="reference internal" href="config.html"><em>Config</em></
 <dd><p>Creates OAuth 2.0 request elements.</p>
 </dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="authomatic.providers.oauth2.OAuth2.refresh_credentials">
-<em class="property">classmethod </em><tt class="descname">refresh_credentials</tt><big>(</big><em>credentials</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#OAuth2.refresh_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.OAuth2.refresh_credentials" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">refresh_credentials</tt><big>(</big><em>credentials</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers/oauth2.html#OAuth2.refresh_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.oauth2.OAuth2.refresh_credentials" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refreshes <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> if it gives sense.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -797,6 +798,23 @@ default is <tt class="docutils literal"><span class="pre">False</span></tt>.</li
 <li>Docs: <a class="reference external" href="http://developer.github.com/v3/#authentication">http://developer.github.com/v3/#authentication</a></li>
 <li>API reference: <a class="reference external" href="http://developer.github.com/v3/">http://developer.github.com/v3/</a></li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>GitHub API <a class="reference external" href="http://developer.github.com/v3/#user-agent-required">documentation</a> sais:</p>
+<blockquote>
+<div>all API requests MUST include a valid <tt class="docutils literal"><span class="pre">User-Agent</span></tt> header.</div></blockquote>
+<p>You can apply a default <tt class="docutils literal"><span class="pre">User-Agent</span></tt> header for all API calls in the config like this:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;github&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;class_&#39;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">GitHub</span><span class="p">,</span>
+        <span class="s">&#39;consumer_key&#39;</span><span class="p">:</span> <span class="s">&#39;#####&#39;</span><span class="p">,</span>
+        <span class="s">&#39;consumer_secret&#39;</span><span class="p">:</span> <span class="s">&#39;#####&#39;</span><span class="p">,</span>
+<span class="hll">        <span class="s">&#39;access_headers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s">&#39;Awesome-Octocat-App&#39;</span><span class="p">},</span>
+</span>    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 <p>Accepts additional keyword arguments:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1803,6 +1821,12 @@ e.g. <a class="reference external" href="http://oauth.net/2/">OAuth 2.0</a> or <
 <li><strong>id</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; A unique numeric ID used to serialize <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a>.</li>
 <li><strong>user_authorization_params</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; A dictionary of additional request parameters for <strong>user authorization request</strong>.</li>
 <li><strong>access_token_params</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; A dictionary of additional request parameters for <strong>access_with_credentials token request</strong>.</li>
+<li><strong>access_headers</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; A dictionary of default HTTP headers that will be used when
+accessing <strong>user&#8217;s</strong> protected resources.
+Applied by <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.access" title="authomatic.providers.AuthorizationProvider.access"><tt class="xref py py-meth docutils literal"><span class="pre">access()</span></tt></a>, <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.update_user" title="authomatic.providers.AuthorizationProvider.update_user"><tt class="xref py py-meth docutils literal"><span class="pre">update_user()</span></tt></a> and <a class="reference internal" href="classes.html#authomatic.core.User.update" title="authomatic.core.User.update"><tt class="xref py py-meth docutils literal"><span class="pre">User.update()</span></tt></a></li>
+<li><strong>access_params</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; A dictionary of default query string parameters that will be used when
+accessing <strong>user&#8217;s</strong> protected resources.
+Applied by <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.access" title="authomatic.providers.AuthorizationProvider.access"><tt class="xref py py-meth docutils literal"><span class="pre">access()</span></tt></a>, <a class="reference internal" href="#authomatic.providers.AuthorizationProvider.update_user" title="authomatic.providers.AuthorizationProvider.update_user"><tt class="xref py py-meth docutils literal"><span class="pre">update_user()</span></tt></a> and <a class="reference internal" href="classes.html#authomatic.core.User.update" title="authomatic.core.User.update"><tt class="xref py py-meth docutils literal"><span class="pre">User.update()</span></tt></a></li>
 </ul>
 </td>
 </tr>
@@ -1935,11 +1959,10 @@ The part before hyphen denotes the type of the provider, the part after hyphen d
 e.g. <tt class="docutils literal"><span class="pre">oauth2.Facebook.type_id</span> <span class="pre">=</span> <span class="pre">'2-5'</span></tt>, <tt class="docutils literal"><span class="pre">oauth1.Twitter.type_id</span> <span class="pre">=</span> <span class="pre">'1-5'</span></tt>.</p>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="authomatic.providers.AuthorizationProvider.access_with_credentials">
-<em class="property">classmethod </em><tt class="descname">access_with_credentials</tt><big>(</big><em>credentials</em>, <em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers=None</em>, <em>body=''</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access_with_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access_with_credentials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fetches the <strong>protected resource</strong> of the <strong>user</strong> to whom belong
-the supplied <tt class="xref py py-data docutils literal"><span class="pre">credentials</span></tt>.</p>
+<dl class="method">
+<dt id="authomatic.providers.AuthorizationProvider.access">
+<tt class="descname">access</tt><big>(</big><em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers=None</em>, <em>body=''</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches the <strong>protected resource</strong> of an authenticated <strong>user</strong>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1958,30 +1981,6 @@ the supplied <tt class="xref py py-data docutils literal"><span class="pre">cred
 <li><strong>method</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; HTTP method of the request.</li>
 <li><strong>headers</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; HTTP headers of the request.</li>
 <li><strong>body</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Body of <tt class="docutils literal"><span class="pre">POST</span></tt>, <tt class="docutils literal"><span class="pre">PUT</span></tt> and <tt class="docutils literal"><span class="pre">PATCH</span></tt> requests.</li>
-<li><strong>max_redirects</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum number of HTTP redirects to follow.</li>
-<li><strong>content_parser</strong> (<em>function</em>) &#8211; A function to be used to parse the <a class="reference internal" href="classes.html#authomatic.core.Response.data" title="authomatic.core.Response.data"><tt class="xref py py-attr docutils literal"><span class="pre">Response.data</span></tt></a> from <a class="reference internal" href="classes.html#authomatic.core.Response.content" title="authomatic.core.Response.content"><tt class="xref py py-attr docutils literal"><span class="pre">Response.content</span></tt></a>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="classes.html#authomatic.core.Response" title="authomatic.core.Response"><tt class="xref py py-class docutils literal"><span class="pre">Response</span></tt></a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="authomatic.providers.AuthorizationProvider.access">
-<tt class="descname">access</tt><big>(</big><em>url</em>, <em>params=None</em>, <em>method='GET'</em>, <em>headers={}</em>, <em>max_redirects=5</em>, <em>content_parser=None</em><big>)</big><a class="reference internal" href="../_modules/authomatic/providers.html#AuthorizationProvider.access"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#authomatic.providers.AuthorizationProvider.access" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fetches the <strong>protected resource</strong> of the logged in <strong>user</strong>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>credentials</strong> &#8211; The <strong>user&#8217;s</strong> <a class="reference internal" href="classes.html#authomatic.core.Credentials" title="authomatic.core.Credentials"><tt class="xref py py-class docutils literal"><span class="pre">Credentials</span></tt></a> (serialized or normal).</li>
-<li><strong>method</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; HTTP method of the request.</li>
-<li><strong>headers</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; HTTP headers of the request.</li>
 <li><strong>max_redirects</strong> (<a class="reference external" href="http://docs.python.org/2.7/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum number of HTTP redirects to follow.</li>
 <li><strong>content_parser</strong> (<em>function</em>) &#8211; A function to be used to parse the <a class="reference internal" href="classes.html#authomatic.core.Response.data" title="authomatic.core.Response.data"><tt class="xref py py-attr docutils literal"><span class="pre">Response.data</span></tt></a> from <a class="reference internal" href="classes.html#authomatic.core.Response.content" title="authomatic.core.Response.content"><tt class="xref py py-attr docutils literal"><span class="pre">Response.content</span></tt></a>.</li>
 </ul>
@@ -2085,6 +2084,7 @@ authenticate a <em>claimed identity</em> of a <strong>user</strong>. e.g. <a cla
 <li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Tutorials / Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/django-simple.html">Simple Django Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/flask-simple.html">Simple Flask Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/pyramid-simple.html">Simple Pyramid Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">Simple Webapp2 Google App Engine Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/credentials.html">Advanced Webapp2 Google App Engine Example</a></li>
 </ul>
