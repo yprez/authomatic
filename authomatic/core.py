@@ -671,6 +671,22 @@ class Credentials(ReprMixin):
             #: :class:`str` Consumer secret specified in the :doc:`config`.
             self.consumer_secret = provider.consumer_secret
 
+        elif 'provider_name' in kwargs and 'provider_class' not in kwargs:
+            self.provider_name = kwargs.get('provider_name')
+
+            provider_settings = self.config.get(self.provider_name)
+            if not provider_settings:
+                raise exceptions.ConfigError('Provider name "{}" not specified!'.format(self.provider_name))
+
+            self.provider_class = provider_settings.get('class_')
+            self.provider_id = provider_settings.get('id')
+
+            self.provider_type = self.provider_class.get_type()
+            self.provider_type_id = self.provider_class.type_id
+
+            self.consumer_key = provider_settings.get('consumer_key', '')
+            self.consumer_secret = provider_settings.get('consumer_secret', '')
+
         else:
             self.provider_name = kwargs.get('provider_name', '')
             self.provider_type = kwargs.get('provider_type', '')
